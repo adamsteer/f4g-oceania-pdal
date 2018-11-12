@@ -19,4 +19,10 @@ Current LiDAR sensors collect points at up to tens of thousands of points per cu
 
 Photogrammetric methods can generate point clouds at close to camera ground sampling distance - which may reach down to a centimetre or so. Again, creating very large, unstructured datasets.
 
+## ASPRS LAS or something else?
+
+
+
+
+
 [next - why PDAL](0-why-pdal.md)
