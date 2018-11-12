@@ -21,10 +21,12 @@ In PDAL, *dimensions* are the set of things described in the point cloud data sc
 
 |Name | Description |
 |-----|-------------|
-|X | |
-|Y | |
-|Z | |
-|Intensity | |
-|Red | |
-|Green | |
-|Blue | |
+|X | 'X' coordinate (longitude in EPSG:3246)|
+|Y | 'Y' coordinate (latitude in EPSG:4326)|
+|Z | 'up' coordinate |
+|Intensity | Laser return intensity |
+|Red | Red channel in RGB colour |
+|Green | Green channel in RGB colour |
+|Blue | Blue channel in RGB colour |
+
+The list of standard PDAL dimensions is here: (https://pdal.io/dimensions.html)[https://pdal.io/dimensions.html]
