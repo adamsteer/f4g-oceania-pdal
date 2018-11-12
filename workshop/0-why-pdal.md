@@ -10,7 +10,7 @@ PDAL's pipeline functionality was the reason I stayed, along with the emergence 
 
 LAStools
 ========
-LAStools and still is a breakthrough in point cloud processing. It is focussed on speed and convenience, with a model of giving away a bunch of functionality and making users pay for advanced tooling. For a mission critical application, though, it's pretty cheap. It's Author, Martin Isenburg, contributes a lot to the LiDAR community and is worth supporting. 
+LAStools and still is a breakthrough in point cloud processing. It is focussed on speed and convenience, with a model of giving away a bunch of functionality and making users pay for advanced tooling. For a mission critical application, though, it's pretty cheap. It's Author, Martin Isenburg, contributes a lot to the LiDAR community and is worth supporting.
 
 PCL
 ===
@@ -42,10 +42,12 @@ GRASS-GIS
 
 lidR
 ====
-It's R. 
+It's R.
 
 All the other things
 ====================
 Discuss! What's your favourite LiDAR processing tool?
 
 I liked Bentley's ecosystem a lot (using Terrasolid, Descartes, Point ... ), but once I left a workplace with a site license, the entry fee is high!
+
+[next - starting out with PDAL](1-querying-data.md)

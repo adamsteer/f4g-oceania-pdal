@@ -46,6 +46,12 @@ If you don't want to use Jupyter, no drama - most processes can be done at the c
 
 ...but stick with us - instructions for dockerised processing are included in the notebook!
 
+### Sample data
+
+Please download the .laz format datasets found here: https://s3.amazonaws.com/f4g-pdal-workshop-sampledata/
+
+...ahead of the workshop. We'll use those for the exercises.
+
 ## Usage
 
 Feel free to explore and use the workshop materials as you see fit, acknowledgment is appreciated. All data samples used in this workshop are licensed CCBY4 and available in public repositories.

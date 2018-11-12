@@ -18,3 +18,5 @@ If we tilt the view, we see that point clouds are irregular in all three dimensi
 Current LiDAR sensors collect points at up to tens of thousands of points per cubic metre ( for example terrestrial laser scanners ), or tens of points per 2.5D metre over broad areas (airborne LiDAR). In either case, racking up datasets with many billions of points can be done pretty quickly.
 
 Photogrammetric methods can generate point clouds at close to camera ground sampling distance - which may reach down to a centimetre or so. Again, creating very large, unstructured datasets.
+
+[next - why PDAL](0-why-pdal.md)

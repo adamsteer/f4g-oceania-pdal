@@ -18,6 +18,10 @@ If you haven't already, open a command line window (if you can use bash, great!)
 
 `cd f4g-oceania-pdal`
 
+If you haven't already, please download a few sample datasets from here:
+
+...and move them to the directory `f4g-oceania-pdal/sample-data`
+
 All of our exercises today are run from there.
 
 ## Running order
@@ -52,3 +56,5 @@ All of our exercises today are run from there.
 
 #### Formal discussion
 [10 min] Wrap up, and feedback
+
+[next - pointclouds](0-pointclouds.md)
