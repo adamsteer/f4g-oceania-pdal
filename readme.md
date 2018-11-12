@@ -9,7 +9,7 @@ adam@spatialised.net
 
 This repository contains materials for a point cloud processing workshop developed by Dr. Adam Steer.
 
-It uses the [Point Data Abstraction Library](http://pdal.io) (PDAL), [Entwine] (http://entwine.io) Python, Numpy, Jupyter notebooks, and the Potree point cloud visualiser to develop some concepts about processing point clouds and visualising results.
+It uses the [Point Data Abstraction Library](http://pdal.io) (PDAL), [Entwine](http://entwine.io) Python, Numpy, Jupyter notebooks, and the Potree point cloud visualiser to develop some concepts about processing point clouds and visualising results.
 
 ![PDAL logo](https://pdal.io/_images/pdal_logo.png)  
 ![Entwine logo](https://entwine.io/_images/entwine_logo_2-color-small.png)
