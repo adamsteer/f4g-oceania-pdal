@@ -1,8 +1,6 @@
-# Starting out with PDAL
+# Starting out with PDAL command lines
 
-In this workshop we will learn by doing - it'll be a bit of a magical mystery tour, in that many concepts will be shown, then discussed.
-
-
+Like GDAL, PDAL is a c++ library, but also a set of command line utilities. In this section we'll explore some common PDAL one-liners for inspection and transforming data.
 
 ## Querying data
 
@@ -14,8 +12,7 @@ We'll dive straight in and use PDAL to run a query on a .LAS file we've obtained
 
 ...gives you a huge JSON spew of a bunch of file attributes, including summary statistics for each dimension in the file.
 
-
-## Dimensions
+## A quick segue about Dimensions
 
 In PDAL, *dimensions* are the set of things described in the point cloud data schema. For LAS format files, dimensions are set within ASPRS LAS standard bounds. Some common dimensions are:
 
@@ -29,4 +26,11 @@ In PDAL, *dimensions* are the set of things described in the point cloud data sc
 |Green | Green channel in RGB colour |
 |Blue | Blue channel in RGB colour |
 
-The list of standard PDAL dimensions is here: (https://pdal.io/dimensions.html)[https://pdal.io/dimensions.html]
+The list of standard PDAL dimensions is here: https://pdal.io/dimensions.html
+
+## Moar metadata!
+
+`pdal info sample-data/lasfile.laz --stats`
+`pdal info sample-data/lasfile.laz --metadata`
+`pdal info sample-data/lasfile.laz --summary`
+`pdal info sample-data/lasfile.laz --boundary`
