@@ -46,9 +46,11 @@ If you don't want to use Jupyter, no drama - most processes can be done at the c
 
 ...but stick with us - instructions for dockerised processing are included in the notebook!
 
-Finally, to visualise some data products, please ensure you have:
+To visualise some data products, please ensure you have:
 - [QGIS](http://qgis.org) or an alternate viewer for geoJSON and georeferenced raster data
 - [CloudCompare](https://www.danielgm.net/cc/) or an alternate LAS/LAZ file viewer
+
+...especially if you're not using Jupyter notebooks to run tasks.
 
 ### Sample data
 

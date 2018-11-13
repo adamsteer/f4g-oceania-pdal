@@ -8,7 +8,7 @@ PDAL's pipeline functionality was the reason I stayed, along with the emergence 
 
 ## LAStools
 
-LAStools and still is a breakthrough in point cloud processing. It is focussed on speed and convenience, with a model of giving away a bunch of functionality and making users pay for advanced tooling. For a mission critical application, though, it's pretty cheap. It's Author, Martin Isenburg, contributes a lot to the LiDAR community and is worth supporting.
+LAStools and still is a breakthrough in point cloud processing. It is focussed on speed and convenience, with a model of giving away a bunch of functionality and making users pay for advanced tooling. For a mission critical application, though, it's pretty cheap. It's author, Martin Isenburg, contributes a lot to the LiDAR community and is worth supporting.
 
 ## PCL
 
@@ -16,10 +16,11 @@ The Point Cloud Library (PCL) carries incredible functionality, and if you under
 
 ## LibLAS
 
-
+libLAS is a free library that can do a lot of basic data interrogation tasking. It is essentially mothballed, but still handy to have in the command line toolkit ( and easy to install on Ubuntu )
 
 ## LASpy
 
+Python libraries for reading LAS/LAZ files into numpy arrays.
 
 ## PyLIDAR
 

@@ -26,11 +26,21 @@ In PDAL, *dimensions* are the set of things described in the point cloud data sc
 |Green | Green channel in RGB colour |
 |Blue | Blue channel in RGB colour |
 
-The list of standard PDAL dimensions is here: https://pdal.io/dimensions.html
+The list of standard PDAL dimensions is here: https://pdal.io/dimensions.html - again, many of these are derived from ASPRS LAS formats. Primarily because it's a data exchange format we can't ignore!
 
 ## Moar metadata!
+
+Let's look at some different metadata queries. What can you see from:
 
 `pdal info sample-data/lasfile.laz --stats`
 `pdal info sample-data/lasfile.laz --metadata`
 `pdal info sample-data/lasfile.laz --summary`
 `pdal info sample-data/lasfile.laz --boundary`
+
+
+
+## Simple transformations
+
+PDAL can do straightforward data translation as a one liner. We'll inspect some use cases jere. The basic operation is  
+
+`pdal translate inffle outfile --operation(s)`
