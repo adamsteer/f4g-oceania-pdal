@@ -1,5 +1,8 @@
 # Command line processing
 
+
+
+
 ## Simple transformations
 
 PDAL can do straightforward data translation as a one liner using the [translate](https://pdal.io/apps/translate.html) convenience application . We'll inspect some use cases here. The basic pattern
@@ -19,10 +22,12 @@ Another super useful convenience application is `density`, although it is aimed 
 `pdal density -i infile.las -o lasdensity.sqlite -f sqlite --smooth --sample-size 5`
 
 
-
 ## Readers and writers
 
 
 
 
 ## Filters
+
+
+[next - pipelines](3-pipelines.md)

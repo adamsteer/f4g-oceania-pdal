@@ -1,27 +1,49 @@
 # Entwine - massive point cloud organisation
 
-Entwine is an application which reorganises data into octree structures. It writes out data as ASPRS LAZ, or binary files with customised schemas.
-
-The Entwine Point Tile (EPT) is a format for writing out octree structures to disk, which can be served statically. The emerging specification is shown here:
+Entwine is an application which reorganises data into octree structures, using the Entwine Point Tile (EPT) is a format for writing out the generated octree structures and metadata to disk. The emerging specification is shown here:
 
 https://github.com/connormanning/entwine/blob/master/doc/entwine-point-tile.md
 
-## EPT or Potree
 
-Potree is a popular format for creating point cloud octrees
+## EPT or Potree?
 
-## creating an entwine index
+Potree is an extremely popular format for creating point cloud octrees, based on the Potree Viewer being almost ubiquitous as the open source webGL based massive point cloud renderer. As of writing this workshop, Potree writes out only LAS 1.2 format 2 - or custom binary files. It is fast for visualisation, but not lossless. In order to **do** anything with the underlying data, you need to keep the original files **and** a potree index in hot storage.
 
-This is actually really easy using docker:
+Using EPT, the fundamental idea is that the octree becomes the 'hot' data, and the original LAS/LAZ tiles or flight swaths can be cold stored (or tape archived) - since both visualisation and data querying/analysis/product derivation can be handled from EPT.
 
-`docker run -it -v $(pwd):/opt/data connormanning/entwine -i dataset.laz -o dataset-entwine`
+Both formats create many very small files - which is OK for object storage, less good for moving data around.
+
+## Creating an EPT index
+
+This is actually really easy using dockerised entwine. Taking our RPAS farm sample, try:
+
+`docker run -it -v $(pwd):/opt/data connormanning/entwine -i APPF-classified.laz -o APPF-classified`
+
+While that's running - entwine builds can also be configured with a simple JSON file, for example:
+
+```
+{
+    "threads": 6,
+    "reprojection": { "out": "EPSG:3857" }
+}
+```
+
+...saved as `web-mercator.json` and run as:
+
+`docker run -it -v $(pwd):/opt/data connormanning/entwine web-mercator.json -i APPF-classified.laz -o APPF-classified`
+
+would run entwine using 6 threads, and reporject the index to web mercator (EPSG:3857).
+
 
 ## viewing an Entwine datasource
 
 Once you've created an Entwine index, start a webserver in the directory you're working in:
 
-`python -m http.server 9001`
+`python -m ./resources/simplecorsserver.py 9001`
 
 ...and navigate to http://potree.entwine.io. Modify the URL to something like:
 
 http://potree.entwine.io/custom.html?r=\"http://localhost:9001/dataset-entwine/\"
+
+
+## reading an Entwine index with PDAL

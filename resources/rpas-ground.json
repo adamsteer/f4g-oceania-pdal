@@ -1,0 +1,34 @@
+{
+  "pipeline":[
+    {
+      "type":"readers.las",
+      "filename":"APPF-farm-sample.laz"
+    },
+    {
+      "type":"filters.assign",
+      "assignment":"Classification[:]=0"
+    },
+    {
+      "type":"filters.elm"
+    },
+    {
+      "type":"filters.outlier"
+    },
+    {
+      "type":"filters.smrf",
+      "ignore":"Classification[7:7]",
+      "slope":0.2,
+      "window":16,
+      "threshold":0.45,
+      "scalar":1.2
+    },
+    {
+      "type":"filters.range",
+      "limits":"Classification[2:2]"
+    },
+    {
+      "type":"writers.las",
+      "filename":"APPF-ground.laz"
+    }
+  ]
+}

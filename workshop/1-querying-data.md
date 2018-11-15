@@ -44,3 +44,6 @@ Let's look at some different metadata queries. What can you see from:
 PDAL can do straightforward data translation as a one liner. We'll inspect some use cases jere. The basic operation is  
 
 `pdal translate inffle outfile --operation(s)`
+
+
+[next - command line processes](2-command-line-processes.md)
