@@ -47,3 +47,15 @@ http://potree.entwine.io/custom.html?r=\"http://localhost:9001/dataset-entwine/\
 
 
 ## reading an Entwine index with PDAL
+
+A key motivation for using entwine is it's lossless data storage. Let's test that, and PDAL's entwine reader at the same time. So let's set up a pipeline...
+
+```
+
+
+
+```
+
+...and a PDAL command line to test the results:
+
+`pdal diff original.laz back-from-entwine.laz`

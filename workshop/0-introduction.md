@@ -26,6 +26,12 @@ If you haven't already, please download a few sample datasets from here:
 
 All of our exercises today are run from there.
 
+## Questions and F=feedback
+
+Feel free to ask questions anytime. Be aware you may be asked to wait for an answer...
+
+Please give feedback! Use the post-it notes to provide anonymous feedback. We'll use software carpentry style, 1 up, 1 down feedback on sticky notes. At break time stick them to the wall, and I'll read them. If anything can be improved for the second session, we'll try to do it. A feedback session will be held at the end. Don't be shy here - the longer you wait to provide input the harder your task will be!
+
 ## Running order
 
 ### Session 1 [1:30 - 3:10, 100 minutes]
@@ -51,12 +57,16 @@ All of our exercises today are run from there.
 [30 min] Using python code in PDAL, using PDAL as a python library with Jupyter notebooks for exploratory analysis
 
 #### Entwine
-[30 min] Introduction to Entwine; creating an entwine index; rendering 3D tiles
+[20 min] Introduction to Entwine; creating an entwine index; rendering 3D tiles
 
 #### Visualisation using Potree
 [20 min] Setting up and viewing entwine datasets on a local web server
 
-#### Formal discussion
-[10 min] Wrap up, and feedback
+#### Future visions and discussion
+
+[10 min] Where I see this going, and where do **you** see this going?
+
+#### Formal feedback discussion
+[10 min] Wrap up; one up, one down feedback
 
 [next - pointclouds](0-pointclouds.md)

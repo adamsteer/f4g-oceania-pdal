@@ -6,41 +6,44 @@ My story was ridiculously simple: I needed to process some LAS 1.4 files, had no
 
 PDAL's pipeline functionality was the reason I stayed, along with the emergence of Entwine, a point cloud management approach that is closely integrated with PDAL and provides lossless, visualisation-and-data-query-ready data organisation.
 
-## LAStools
+And at the end of the day it's what I know most about how to drive.
+
+## All the other things
+
+### LAStools
 
 LAStools and still is a breakthrough in point cloud processing. It is focussed on speed and convenience, with a model of giving away a bunch of functionality and making users pay for advanced tooling. For a mission critical application, though, it's pretty cheap. It's author, Martin Isenburg, contributes a lot to the LiDAR community and is worth supporting.
 
-## PCL
+### PCL
 
 The Point Cloud Library (PCL) carries incredible functionality, and if you understand it well you should use it. It's less convenient in terms of processing pipelines, and PDAL actually carries some convenience wrappers for PCL functionality.
 
-## LibLAS
+### LibLAS
 
 libLAS is a free library that can do a lot of basic data interrogation tasking. It is essentially mothballed, but still handy to have in the command line toolkit ( and easy to install on Ubuntu )
 
-## LASpy
+### LASpy
 
-Python libraries for reading LAS/LAZ files into numpy arrays.
+Python libraries for reading LAS files into numpy arrays and doing some simple operations.
 
-## PyLIDAR
+### PyLIDAR
 
 PyLIDAR wraps around SPDlib, a method for packaging full waveform LiDAR into HDF containers.
 
-
-## DASOS
-
+### DASOS
+...
 
 ## FUSION
+...
+
+### GRASS-GIS
 
 
-## GRASS-GIS
-
-
-## lidR
+### lidR
 
 It's R.
 
-## All the other things
+### All the other things
 
 Discuss! What's your favourite LiDAR processing tool?
 

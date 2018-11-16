@@ -9,18 +9,19 @@
       "assignment":"Classification[:]=0"
     },
     {
-      "type":"filters.elm"
+      "type":"filters.elm",
+      "cell": 10.0,
+      "class": 7,
+      "threshold": 0.5
     },
     {
       "type":"filters.outlier"
     },
     {
-      "type":"filters.smrf",
+      "type":"filters.pmf",
       "ignore":"Classification[7:7]",
-      "slope":0.2,
-      "window":16,
-      "threshold":0.45,
-      "scalar":1.2
+      "initial_distance":0.3,
+      "cell_size": 2
     },
     {
       "type":"filters.range",
@@ -28,7 +29,7 @@
     },
     {
       "type":"writers.las",
-      "filename":"APPF-ground.laz"
+      "filename":"APPF-ground-20-pmf.laz"
     }
   ]
 }

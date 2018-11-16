@@ -49,25 +49,26 @@ Create a file 'rpas-ground.json' and populate it with:
   "pipeline":[
     {
       "type":"readers.las",
-      "filename":"APPF-farm.laz"
-    }
+      "filename":"APPF-farm-sample.laz"
+    },
     {
       "type":"filters.assign",
       "assignment":"Classification[:]=0"
     },
     {
-      "type":"filters.elm"
+      "type":"filters.elm",
+      "cell": 10.0,
+      "class": 7,
+      "threshold": 0.5
     },
     {
       "type":"filters.outlier"
     },
     {
-      "type":"filters.smrf",
+      "type":"filters.pmf",
       "ignore":"Classification[7:7]",
-      "slope":0.2,
-      "window":16,
-      "threshold":0.15,
-      "scalar":1.2
+      "initial_distance":0.3,
+      "cell_size": 2
     },
     {
       "type":"filters.range",
@@ -75,7 +76,7 @@ Create a file 'rpas-ground.json' and populate it with:
     },
     {
       "type":"writers.las",
-      "filename":"APPF-ground.laz"
+      "filename":"APPF-ground-20-pmf.laz"
     }
   ]
 }
