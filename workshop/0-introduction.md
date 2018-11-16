@@ -26,7 +26,7 @@ If you haven't already, please download a few sample datasets from here:
 
 All of our exercises today are run from there.
 
-## Questions and F=feedback
+## Questions and feedback
 
 Feel free to ask questions anytime. Be aware you may be asked to wait for an answer...
 
