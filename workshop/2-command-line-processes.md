@@ -1,7 +1,35 @@
 # Command line processing
 
+## Querying data
 
+One of the most fundamental tasks we can do is find out about our data - what's in it, where it is, and whether there are any problems with it.
 
+We'll dive straight in and use PDAL to run a query on a .LAS file we've obtained.
+
+`pdal info sample-data/lasfile.laz`
+
+...gives you a huge JSON spew of a bunch of file attributes, including summary statistics for each dimension in the file.
+
+Let's look at some different metadata queries. What can you see from:
+
+`pdal info sample-data/lasfile.laz --stats`  
+`pdal info sample-data/lasfile.laz --metadata`  
+`pdal info sample-data/lasfile.laz --summary`  
+`pdal info sample-data/lasfile.laz --boundary`  
+
+## Searching for points
+
+We can look for information about points. Try:
+
+`pdal info sample-data/lasfile.laz -p 0`
+
+...it should tell you all about the first point (0-indexed) in the file.
+
+More useful is finding points by geographic location. the `query` option to `info` can help:
+
+`pdal info sample-data/lasfile.laz --query "637301.20, 851217.57, 496.49/3"``
+
+...this will return the three nearest points to the coordinates provided (`/3`). You might use this if you want to find a set of points near ground control, and assess how close they are.
 
 ## Simple transformations
 
