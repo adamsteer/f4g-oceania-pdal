@@ -51,8 +51,15 @@ http://potree.entwine.io/custom.html?r=\"http://localhost:9001/dataset-entwine/\
 A key motivation for using entwine is it's lossless data storage. Let's test that, and PDAL's entwine reader at the same time. So let's set up a pipeline...
 
 ```
-
-
+{
+  "pipeline": [
+    {
+      "type": "readers.ept",
+      "filename": "ept://APPF-classified",
+    },
+    "back-from-entwine.laz"
+  ]
+}
 
 ```
 

@@ -38,6 +38,19 @@ Let's look at some different metadata queries. What can you see from:
 `pdal info sample-data/lasfile.laz --boundary`
 
 
+## Searching for points
+
+We can look for information about points. Try:
+
+`pdal info sample-data/lasfile.laz -p 0`
+
+...it should tell you all about the first point (0-indexed) in the file.
+
+More useful is finding points by geographic location. the `query` option to `info` can help:
+
+`pdal info sample-data/lasfile.laz --query "637301.20, 851217.57, 496.49/3"``
+
+...this will return the three nearest points to the coordinates provided (`/3`). You might use this if you want to find a set of points near ground control, and assess how close they are.
 
 ## Simple transformations
 

@@ -94,16 +94,65 @@ Create a file 'rpas-ground.json' and populate it with:
 - next, using `filters.smrf` (Simple Morphological Filter) to label points as 'ground'
 - ...then finally, removing any points *not* labelled as ground from the output and writing them out to `APPF-ground.laz`
 
-Once you've got an putput file, if you have CloudCompare (or another LAS/LAZ viewer), open `APPF-ground.laz` and check the results.
+Once you've got an output file, if you have CloudCompare (or another LAS/LAZ viewer), open `APPF-ground.laz` and check the results.
 
-So here we've leaped right into the deep end with a long chain of processing. The point here is showing how it's actually pretty easy - once you know what it is you need to do.
+Here we've leaped right into the deep end with a long chain of processing. The point here is showing how it's actually pretty easy - once you know what it is you need to do. We've used a `reader`, a bunch of `filters` chained together to operate on a `pointview`, and exported the result using a `writer`
 
 Try pulling apart the pipeline and running parts of it, or removing some of the filters and see what happens
+
 
 ## Overriding it all
 
 In the example above, input and output filenames are fixed, and if we want to alter parameters we need to go edit a JSON file and re run everything. That's a little painful, especially if you have a thousand tiles to process!
 
 We can fix that - using either command line overrides, or for clever folks, templating in JSON (we'll get to that shortly using Python).
+
+Let's modify our pipeline a little to remove the final filter, and write out the entire dataset with noise a ground points labelled:
+
+```
+{
+  "pipeline":[
+    {
+      "type":"readers.las",
+      "filename":"APPF-farm-sample.laz"
+    },
+    {
+      "type":"filters.assign",
+      "assignment":"Classification[:]=0"
+    },
+    {
+      "type":"filters.elm",
+      "cell": 10.0,
+      "class": 7,
+      "threshold": 0.5
+    },
+    {
+      "type":"filters.outlier"
+    },
+    {
+      "type":"filters.pmf",
+      "ignore":"Classification[7:7]",
+      "initial_distance":0.3,
+      "cell_size": 2
+    },
+    {
+      "type":"writers.las",
+      "filename":"APPF-ground-pmf.laz"
+    }
+  ]
+}
+```
+
+...and for argument's sake, write out a different filename:
+
+`pdal pipeline rpas-ground.json --writers.las.filename="some-different-file.laz"`
+
+We can also modify filter parameters, to tune how points are labelled:
+
+`pdal pipeline rpas-ground.json --filters.elm.cell=20.0 --filters.pmf.initial_distance=0.4`
+
+## I want to do something other than gets points!
+
+
 
 [next - python and PDAL](4-python-and-pdal.md)
