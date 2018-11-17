@@ -32,11 +32,10 @@ The list of standard PDAL dimensions is here: https://pdal.io/dimensions.html - 
 
 Let's look at some different metadata queries. What can you see from:
 
-`pdal info sample-data/lasfile.laz --stats`
-`pdal info sample-data/lasfile.laz --metadata`
-`pdal info sample-data/lasfile.laz --summary`
-`pdal info sample-data/lasfile.laz --boundary`
-
+`pdal info sample-data/lasfile.laz --stats`  
+`pdal info sample-data/lasfile.laz --metadata`  
+`pdal info sample-data/lasfile.laz --summary`  
+`pdal info sample-data/lasfile.laz --boundary`  
 
 ## Searching for points
 

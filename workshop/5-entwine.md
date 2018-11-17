@@ -66,3 +66,7 @@ A key motivation for using entwine is it's lossless data storage. Let's test tha
 ...and a PDAL command line to test the results:
 
 `pdal diff original.laz back-from-entwine.laz`
+
+Did we make it?
+
+Let's try something else - retrieve a single tile from a massive entwine index stored remotely, and check it against 
