@@ -1,6 +1,6 @@
 # Entwine - massive point cloud organisation
 
-Entwine is an application which reorganises data into octree structures, using the Entwine Point Tile (EPT) is a format for writing out the generated octree structures and metadata to disk. The emerging specification is shown here:
+Entwine is an application which reorganises data into [https://en.wikipedia.org/wiki/Octree](octree) structures, using the Entwine Point Tile (EPT) is a format for writing out the generated octree structures and metadata to disk. The emerging specification is shown here:
 
 https://github.com/connormanning/entwine/blob/master/doc/entwine-point-tile.md
 
@@ -32,7 +32,8 @@ While that's running - entwine builds can also be configured with a simple JSON 
 
 `docker run -it -v $(pwd):/opt/data connormanning/entwine web-mercator.json -i APPF-classified.laz -o APPF-classified`
 
-would run entwine using 6 threads, and reporject the index to web mercator (EPSG:3857).
+...would run entwine using 6 threads, and reproject the index to web mercator (EPSG:3857).
+
 
 
 ## viewing an Entwine datasource
@@ -69,4 +70,4 @@ A key motivation for using entwine is it's lossless data storage. Let's test tha
 
 Did we make it?
 
-Let's try something else - retrieve a single tile from a massive entwine index stored remotely, and check it against 
+Let's try something else - retrieve a single tile from a massive entwine index stored remotely, and check it against

@@ -49,12 +49,14 @@ Another super useful convenience application is `density`, although it is aimed 
 
 `pdal density -i infile.las -o lasdensity.sqlite -f sqlite --smooth --sample-size 5`
 
-## Readers and writers
+## Translating files
 
 
 
 
-## Filters
+## Filtering points
+
+
 
 
 [next - pipelines](3-pipelines.md)

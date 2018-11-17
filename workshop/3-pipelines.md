@@ -151,7 +151,7 @@ We can also modify filter parameters, to tune how points are labelled:
 
 `pdal pipeline rpas-ground.json --filters.elm.cell=20.0 --filters.pmf.initial_distance=0.4`
 
-## I want to do something other than gets points!
+## I want to make a product from my data
 
 
 

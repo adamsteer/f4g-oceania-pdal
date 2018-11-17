@@ -11,7 +11,7 @@ Python functions can be run as part of a `pipeline` using `filters.python`.
 
 ## PDAL as a python library
 
-This is best demonstrated in a Jupyter notebook.
+This is best demonstrated in a Jupyter notebook (underway)
 
 
 [next - entwine](5-entwine.md)
