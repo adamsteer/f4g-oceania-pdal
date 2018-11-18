@@ -22,6 +22,8 @@ In PDAL, `dimensions` are the set of things described in the point cloud data sc
 
 The list of standard PDAL dimensions is here: https://pdal.io/dimensions.html - again, many of these are derived from ASPRS LAS formats. Primarily because it's a data exchange format we can't ignore!
 
+
+
 ## Stages
 
 A stage is the PDAL way of describing a thing which operates on points. That's it!
