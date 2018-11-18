@@ -70,4 +70,28 @@ A key motivation for using entwine is it's lossless data storage. Let's test tha
 
 Did we make it?
 
-Let's try something else - retrieve a single tile from a massive entwine index stored remotely, and check it against
+## Scaling it upward
+
+This workshop promised billions of points. So let's try that out.
+
+Point a web browser at: http://potree.entwine.io/data/custom.html?r="http://act2015-8ppm-rgb-ept.s3.amazonaws.com/"
+
+...and have an explore. Pick out a small area, or use this one i've prepared:
+
+
+Then, try out the following pipeline:
+
+{
+  "pipeline": [
+    {
+      "type": "readers.ept",
+      "filename": "http://act2015-8ppm-rgb-ept.s3.amazonaws.com/",
+      "bounds": "([693616, 692769], [6090200,6091233])"
+    },
+    {
+        "type":"writers.gdal",
+        "resolution":2,
+        "filename":"output.tiff"
+    }
+  ]
+}
