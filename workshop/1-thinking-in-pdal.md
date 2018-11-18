@@ -4,7 +4,7 @@ PDAL has a pattern you'll repeat all the time when working with it: operations h
 
 Reading metadata is a special case, which doesn't create a `point view`, but does make use of `readers`.
 
-These operational components are explained below - we'll keen coming back to this pattern as we process data throughout the workshop. The canonical reference on [https://pdal.io/development/overview.html#](PDAL architecture) is a handy guide.
+These operational components are explained below - we'll keen coming back to this pattern as we process data throughout the workshop. The canonical reference on [PDAL architecture](https://pdal.io/development/overview.html#) is a handy guide.
 
 ## Dimensions
 
