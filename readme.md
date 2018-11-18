@@ -42,7 +42,7 @@ You'll still need to run entwine via docker, so:
 
 If you don't want to use Jupyter, no drama - most processes can be done at the command line using dockerised PDAL, which you can get via:
 
-`docker pull pdal/pdal`
+`docker pull pdal/ubuntu:1.8`
 
 ...but stick with us - instructions for dockerised processing are included in the notebook!
 
