@@ -153,6 +153,9 @@ We can also modify filter parameters, to tune how points are labelled:
 
 ## I want to make a product from my data
 
+Something about creating DSMs etc here.
 
+
+## Summary
 
 [next - python and PDAL](4-python-and-pdal.md)

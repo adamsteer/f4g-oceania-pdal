@@ -72,15 +72,16 @@ Did we make it?
 
 ## Scaling it upward
 
+### Note - this requires PDAL 1.8, which is not yet in stable release
+
 This workshop promised billions of points. So let's try that out.
 
 Point a web browser at: http://potree.entwine.io/data/custom.html?r="http://act2015-8ppm-rgb-ept.s3.amazonaws.com/"
 
 ...and have an explore. Pick out a small area, or use this one i've prepared:
 
-
 Then, try out the following pipeline:
-
+```
 {
   "pipeline": [
     {
@@ -95,3 +96,6 @@ Then, try out the following pipeline:
     }
   ]
 }
+```
+
+# Summary

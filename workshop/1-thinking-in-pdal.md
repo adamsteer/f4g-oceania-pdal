@@ -22,26 +22,29 @@ In PDAL, `dimensions` are the set of things described in the point cloud data sc
 
 The list of standard PDAL dimensions is here: https://pdal.io/dimensions.html - again, many of these are derived from ASPRS LAS formats. Primarily because it's a data exchange format we can't ignore!
 
-
-
 ## Stages
 
 A stage is the PDAL way of describing a thing which operates on points. That's it!
 
 ## Readers
 
+Readers are a stage which reads in data from a filesystem into a `pointview` - which can be operated on by `filters`. PDAL includes a range of 'built in' readers, and others can be added or removed as plugins as build time. You can also write your own!
 
 Reference: https://pdal.io/stages/readers.html
 
 ## Filters
 
+Once you've read data into a `pointview`, filters are where the magic happens - they're methods for point data processing! YOu can stack filters together to form complex 'one liners' - with the `pointview` modified by one `filter` being passed to the next. The main caveat here is to be aware of how each filter modifies the view, in order to get the results you expect.
 
-Reference: https://pdal.io/stages/filters.html
+Reftererence: https://pdal.io/stages/filters.html
 
 ## Writers
 
+As the name suggests, writers are a stage which writes out a `pointview` to a file! As for readers, PDAL includes a range of 'built in' writers, and others can be added or removed as plugins as build time. You can also write your own!
 
 Reference: https://pdal.io/stages/writers.html
+
+## Summary
 
 
 [next - command line processes](2-command-line-processes.md)

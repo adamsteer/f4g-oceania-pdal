@@ -46,7 +46,7 @@ def invert-z(Ins, Outs):
 
 ...and is saved in the working directory as `invert-z.py`
 
-Pretty simple, right? Your Python function can get as complex as you like. Just remember that PDAL's 'read, process, write' strategy extends to it's Python API also. 
+Pretty simple, right? Your Python function can get as complex as you like. Just remember that PDAL's 'read, process, write' strategy extends to it's Python API also.
 
 
 ## PDAL as a python library
@@ -63,7 +63,7 @@ Start your virtual environment:
 
 ...which should give you access to [the notebook](../notebooks/PDAL-python.ipynb). It's a fully worked example. We'll step through it, and feel free to experiment with it!
 
-## The canonical reference
+## Summary
 
 ...is here: https://pdal.io/python.html
 
