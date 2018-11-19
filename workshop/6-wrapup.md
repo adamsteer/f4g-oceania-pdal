@@ -22,3 +22,5 @@ PDAL doesn't do everything for you. We did no parallel tasking here - PDAL is si
 ## Futures
 
 What do you see? Discussion time...
+
+[Acknowledgements](7-acknowledgements.md)

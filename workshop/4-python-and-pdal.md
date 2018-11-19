@@ -23,8 +23,8 @@ Python functions can be run as part of a `pipeline` using `filters.python`. This
     },
     {
       "type":"filters.python",
-      "script":"invert-z.py",
-      "function":"invert-z",
+      "script":"invert_z.py",
+      "function":"invert_z",
       "module":"anything"
     },
     {
@@ -39,9 +39,9 @@ Python functions can be run as part of a `pipeline` using `filters.python`. This
 The python function looks like this:
 
 ```
-def invert-z(Ins, Outs):
+def invert_z(Ins, Outs):
     Z = Ins['Z']
-    Outs['Z'] = -1 * Z
+    Outs['Z'] = -Z
 ```
 
 ...and is saved in the working directory as `invert-z.py`

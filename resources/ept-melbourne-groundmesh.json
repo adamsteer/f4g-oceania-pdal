@@ -1,0 +1,23 @@
+{
+  "pipeline": [
+    {
+        "type": "readers.ept",
+        "filename": "http://melbourne-2018-ept.s3.amazonaws.com/",
+        "bounds": "([692769, 693616], [6090200,6091233])"
+    },
+    {
+        "type":"filters.elm"
+    },
+    {
+        "type":"filters.pmf"
+    },
+    {
+        "type":"filters.poisson"
+    },
+    {
+        "type":"writers.ply",
+        "faces":true,
+        "filename":"output.ply"
+    }
+  ]
+}

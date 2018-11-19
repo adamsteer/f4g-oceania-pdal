@@ -49,14 +49,13 @@ To compress a file to LAZ format, try:
 
 `pdal translate -i infile.las -o outfile.laz --writers.las.compression=true`
 
-
-
 ## Filtering points
 
 Points can be filtered many ways. We can restrict ranges point dimensions. If points carry labels (for example ASPRS classifications) we can use PDAL to exclude classes. We can also try to label noise points,
 
-
 ## Summary
+
+PDAL can run as a command line application - using options to specify and modify stages and point views. This is really powerful, but can get unwieldy for long operations.
 
 
 [next - pipelines](3-pipelines.md)

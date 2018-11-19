@@ -46,5 +46,6 @@ Reference: https://pdal.io/stages/writers.html
 
 ## Summary
 
+PDAL thinks in stages and point views. Readers to create views, filters to operate on views, and writers to write views out. Keep that in mind... everything else operates around that!
 
 [next - command line processes](2-command-line-processes.md)

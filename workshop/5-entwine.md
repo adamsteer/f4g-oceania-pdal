@@ -99,3 +99,6 @@ Then, try out the following pipeline:
 ```
 
 # Summary
+
+
+[next - wrapping up](6-wrapup.md)
