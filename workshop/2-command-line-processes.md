@@ -31,6 +31,10 @@ More useful is finding points by geographic location. the `query` option to `inf
 
 ...this will return the three nearest points to the coordinates provided (`/3`). You might use this if you want to find a set of points near ground control, and assess how close they are.
 
+Another super useful convenience application is `density`, although it is aimed at 2.5D data (eg airborne LiDAR). This returns a hexbinned representation of point density in your data, which is easily visualised by QGIS. It's a great and quick QA/QC assessment tool:
+
+`pdal density -i infile.las -o lasdensity.sqlite -f sqlite --smooth --sample-size 5`
+
 ## Simple transformations
 
 PDAL can do straightforward data translation as a one liner using the [translate](https://pdal.io/apps/translate.html) convenience application . We'll inspect some use cases here. The basic pattern
@@ -45,18 +49,11 @@ To compress a file to LAZ format, try:
 
 `pdal translate -i infile.las -o outfile.laz --writers.las.compression=true`
 
-Another super useful convenience application is `density`, although it is aimed at 2.5D data (eg airborne LiDAR). This returns a hexbinned representation of point density in your data, which is easily visualised by QGIS. It's a great and quick QA/QC assessment tool:
-
-`pdal density -i infile.las -o lasdensity.sqlite -f sqlite --smooth --sample-size 5`
-
-## Translating files
-
-
 
 
 ## Filtering points
 
-
+Points can be filtered many ways. We can restrict ranges point dimensions. If points carry labels (for example ASPRS classifications) we can use PDAL to exclude classes. We can also try to label noise points,
 
 
 ## Summary

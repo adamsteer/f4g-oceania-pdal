@@ -153,7 +153,7 @@ We can also modify filter parameters, to tune how points are labelled:
 
 ## I want to make a product from my data
 
-Something about creating DSMs etc here.
+Something about creating DSMs and meshes etc here.
 
 
 ## Summary

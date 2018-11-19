@@ -32,4 +32,9 @@ The python notebook example shows data collected by the University of New York o
 
 ### ACT Government
 
-Canberra LIDAR data were collected and made freely available by the ACT Government: 
+Canberra LIDAR data were collected and made freely available by the ACT Government:
+
+
+### City of Melbourne
+
+The City of Melbourne's freshly baked open point cloud data were also extremely useful: 
