@@ -11,7 +11,7 @@ We can also cast these workflows into JSON configuration snippets, and run them 
   "pipeline":[
     {
         "type":"readers.las",
-        "filename":"inputfile.las"
+        "filename":"APPF-farm-sample-original.laz"
     },
     {
         "type":"filters.reprojection",
@@ -21,7 +21,7 @@ We can also cast these workflows into JSON configuration snippets, and run them 
     {
       "type":"writers.las",
       "compression": "laszip",
-      "filename":"outputfile.laz"
+      "filename":"APPF-farm-sample.laz"
     }
   ]
 }
@@ -153,13 +153,47 @@ We can also modify filter parameters, to tune how points are labelled:
 
 ## I want to make a product from my data
 
-Something about creating DSMs and meshes etc here.
+We can string together more! In this example we'll create a DTM from the ground points we just created:
 
-
-## Give me just a bit of data!
-
-PDAL clipping functionality
-
+```
+{
+  "pipeline":[
+    {
+      "type":"readers.las",
+      "filename":"APPF-farm-sample.laz"
+    },
+    {
+      "type":"filters.assign",
+      "assignment":"Classification[:]=0"
+    },
+    {
+      "type":"filters.elm",
+      "cell": 10.0,
+      "class": 7,
+      "threshold": 0.5
+    },
+    {
+      "type":"filters.outlier"
+    },
+    {
+      "type":"filters.pmf",
+      "ignore":"Classification[7:7]",
+      "initial_distance":0.3,
+      "cell_size": 2
+    },
+    {
+        "type":"filters.range",
+        "limits":"Classification[2:2]"
+    }
+    {
+      "type":"writers.gdal",
+      "filename":"APPF-ground.tiff",
+      "resolution":1
+      "output_type":"idw"
+    }
+  ]
+}
+```
 
 ## Summary
 
