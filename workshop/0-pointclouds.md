@@ -1,6 +1,6 @@
 # Point clouds
 
-Once upon a time this would have been a LiDAR workshop. Until mid-2006 when Structure from Motion photogrammetry became a thing[1] and subsequently exploded. Now, it's about processing data from both LiDAR and photogrammetric sources.
+Once upon a time this would have been a LiDAR workshop. Until mid-2006 when Structure from Motion photogrammetry became a thing and subsequently exploded. Now, it's about processing data from both LiDAR and photogrammetric sources.
 
 ## What do we mean by 'point cloud'?
 
@@ -25,9 +25,6 @@ In both cases, data don't exist on regular grids - and in both cases, there are 
 The [LAS file format](https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities) is a common data exchange standard maintained by the American Society for Photogrammetry and Remote Sensing. It's an open format, and you're welcome to join ASPRS and contribute \(see (https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities) \)
 
 It is heavily focussed on airborne LiDAR - and relatively inflexible \(compared to, say Stanford Ply which has a flexible data schema \). However - it's predictable to work with and forms the basis of many delivery standards (eg ICSM). Using the LASzip compressor, it's also relatively compact.
-
-
-
 
 
 [next - why PDAL](0-why-pdal.md)
