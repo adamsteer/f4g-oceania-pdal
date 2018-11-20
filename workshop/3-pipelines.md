@@ -19,9 +19,9 @@ We can also cast these workflows into JSON configuration snippets, and run them 
         "out_srs":"EPSG:28356"
     },
     {
-      "type":"writers.las",
-      "compression": "laszip",
-      "filename":"APPF-farm-sample.laz"
+        "type":"writers.las",
+        "compression": "laszip",
+        "filename":"APPF-farm-sample.laz"
     }
   ]
 }
@@ -48,35 +48,35 @@ Create a file 'rpas-ground.json' and populate it with:
 {
   "pipeline":[
     {
-      "type":"readers.las",
-      "filename":"APPF-farm-sample.laz"
+        "type":"readers.las",
+        "filename":"APPF-farm-sample.laz"
     },
     {
-      "type":"filters.assign",
-      "assignment":"Classification[:]=0"
+        "type":"filters.assign",
+        "assignment":"Classification[:]=0"
     },
     {
-      "type":"filters.elm",
-      "cell": 10.0,
-      "class": 7,
-      "threshold": 0.5
+        "type":"filters.elm",
+        "cell": 10.0,
+        "class": 7,
+        "threshold": 0.5
     },
     {
-      "type":"filters.outlier"
+        "type":"filters.outlier"
     },
     {
-      "type":"filters.pmf",
-      "ignore":"Classification[7:7]",
-      "initial_distance":0.3,
-      "cell_size": 2
+        "type":"filters.pmf",
+        "ignore":"Classification[7:7]",
+        "initial_distance":0.3,
+        "cell_size": 2
     },
     {
-      "type":"filters.range",
-      "limits":"Classification[2:2]"
+        "type":"filters.range",
+        "limits":"Classification[2:2]"
     },
     {
-      "type":"writers.las",
-      "filename":"APPF-ground-20-pmf.laz"
+        "type":"writers.las",
+        "filename":"APPF-ground-20-pmf.laz"
     }
   ]
 }
@@ -100,8 +100,7 @@ Here we've leaped right into the deep end with a long chain of processing. The p
 
 Try pulling apart the pipeline and running parts of it, or removing some of the filters and see what happens
 
-
-## Overriding it all
+## Overriding options
 
 In the example above, input and output filenames are fixed, and if we want to alter parameters we need to go edit a JSON file and re run everything. That's a little painful, especially if you have a thousand tiles to process!
 
@@ -113,31 +112,31 @@ Let's modify our pipeline a little to remove the final filter, and write out the
 {
   "pipeline":[
     {
-      "type":"readers.las",
+        "type":"readers.las",
       "filename":"APPF-farm-sample.laz"
     },
     {
-      "type":"filters.assign",
-      "assignment":"Classification[:]=0"
+        "type":"filters.assign",
+        "assignment":"Classification[:]=0"
     },
     {
-      "type":"filters.elm",
-      "cell": 10.0,
-      "class": 7,
-      "threshold": 0.5
+        "type":"filters.elm",
+        "cell": 10.0,
+        "class": 7,
+        "threshold": 0.5
     },
     {
-      "type":"filters.outlier"
+        "type":"filters.outlier"
     },
     {
-      "type":"filters.pmf",
-      "ignore":"Classification[7:7]",
-      "initial_distance":0.3,
-      "cell_size": 2
+        "type":"filters.pmf",
+        "ignore":"Classification[7:7]",
+        "initial_distance":0.3,
+        "cell_size": 2
     },
     {
-      "type":"writers.las",
-      "filename":"APPF-ground-pmf.laz"
+        "type":"writers.las",
+        "filename":"APPF-ground-pmf.laz"
     }
   ]
 }
@@ -159,42 +158,58 @@ We can string together more! In this example we'll create a DTM from the ground 
 {
   "pipeline":[
     {
-      "type":"readers.las",
-      "filename":"APPF-farm-sample.laz"
+        "type":"readers.las",
+        "filename":"APPF-farm-sample.laz"
     },
     {
-      "type":"filters.assign",
-      "assignment":"Classification[:]=0"
+        "type":"filters.assign",
+        "assignment":"Classification[:]=0"
     },
     {
-      "type":"filters.elm",
-      "cell": 10.0,
-      "class": 7,
-      "threshold": 0.5
+        "type":"filters.elm",
+        "cell": 10.0,
+        "class": 7,
+        "threshold": 0.5
     },
     {
-      "type":"filters.outlier"
+        "type":"filters.outlier"
     },
     {
-      "type":"filters.pmf",
-      "ignore":"Classification[7:7]",
-      "initial_distance":0.3,
-      "cell_size": 2
+        "type":"filters.pmf",
+        "ignore":"Classification[7:7]",
+        "initial_distance":0.3,
+        "cell_size": 2
     },
     {
         "type":"filters.range",
         "limits":"Classification[2:2]"
     }
     {
-      "type":"writers.gdal",
-      "filename":"APPF-ground.tiff",
-      "resolution":1
-      "output_type":"idw"
+        "type":"writers.gdal",
+        "filename":"APPF-ground.tiff",
+        "resolution":1
+        "output_type":"idw"
     }
   ]
 }
 ```
+...you can open the result in QGIS and take a look.
+
+Meshes can be made the same way, try replacing the `writers.gdal` block with:
+```
+    {
+        "type":"filters.poisson"
+    },
+    {
+        "type":"writers.ply",
+        "filename":"APPF-ground.ply"
+    }
+```
+
+...to make a ground mesh - and then removing the range filter to create a surface mesh (this might take a while)!
 
 ## Summary
+
+Pipelines are the bread and butter of PDAL as a command line application. Re-usable code chunks which are easily readable, and reconfigurable on the fly. 
 
 [next - python and PDAL](4-python-and-pdal.md)
