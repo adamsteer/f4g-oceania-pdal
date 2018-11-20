@@ -156,6 +156,11 @@ We can also modify filter parameters, to tune how points are labelled:
 Something about creating DSMs and meshes etc here.
 
 
+## Give me just a bit of data!
+
+PDAL clipping functionality
+
+
 ## Summary
 
 [next - python and PDAL](4-python-and-pdal.md)

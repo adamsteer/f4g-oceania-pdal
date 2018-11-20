@@ -44,7 +44,7 @@ Please give feedback! Use the post-it notes to provide anonymous feedback. We'll
 [20 min] Point clouds, why PDAL, what are some alternatives, room for discussion
 
 #### Starting out with PDAL
-[30 min] PDAL on the command line, using conda or docker - to query metadata and points; Introduction to processing pipelines.
+[30 min] Thinking in PDAL, PDAL on the command line, using conda or docker - to query metadata and points; Introduction to processing pipelines.
 
 #### Processing data with PDAL
 [30 min] Using a pipeline to find ground points, and reduce noise
@@ -57,10 +57,10 @@ Please give feedback! Use the post-it notes to provide anonymous feedback. We'll
 [30 min] Using python code in PDAL, using PDAL as a python library with Jupyter notebooks for exploratory analysis
 
 #### Entwine
-[20 min] Introduction to Entwine; creating an entwine index; rendering 3D tiles
+[20 min] Introduction to Entwine; creating an entwine EPT index; Setting up and viewing entwine datasets on a local web server
 
-#### Visualisation using Potree
-[20 min] Setting up and viewing entwine datasets on a local web server
+#### A fun project - mini hackfest
+[??] Taking public data and making it better!
 
 #### Future visions and discussion
 

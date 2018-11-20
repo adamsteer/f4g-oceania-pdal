@@ -49,4 +49,4 @@ Discuss! What's your favourite LiDAR processing tool?
 
 I liked Bentley's ecosystem a lot (using Terrasolid, Descartes, Point ... ), but once I left a workplace with a site license, the entry fee is high!
 
-[next - starting out with PDAL](1-querying-data.md)
+[next - starting out with PDAL](1-thinking-in-pdal.md)

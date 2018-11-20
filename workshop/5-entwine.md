@@ -101,4 +101,4 @@ Then, try out the following pipeline:
 # Summary
 
 
-[next - wrapping up](6-wrapup.md)
+[next - wrapping up](6-fun-project.md)
