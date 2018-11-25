@@ -4,7 +4,7 @@ This week the City of Melbourne released a new point cloud dataset! It's availab
 
 ...but don't download it! It's 4 GB of uncompressed LAS tiles, roughly 200 of them.
 
-Instead, check out the entwine resource here:
+Instead, check out the entwine resource here: http://melbourne-2018-ept.s3.amazonaws.com/
 
 The data are generated from a photogrammetric model, and are very pretty! However - none of the points are labelled. This mini hack is aimed at fixing that.
 
