@@ -1,9 +1,10 @@
 # Entwine - massive point cloud organisation
 
-Entwine is an application which reorganises data into [https://en.wikipedia.org/wiki/Octree](octree) structures, using the Entwine Point Tile (EPT) is a format for writing out the generated octree structures and metadata to disk. The emerging specification is shown here:
+Entwine is an application which reorganises data into [https://en.wikipedia.org/wiki/Octree](octree) structures, using the Entwine Point Tile (EPT) format. The emerging specification is shown here:
 
 https://github.com/connormanning/entwine/blob/master/doc/entwine-point-tile.md
 
+EPT is intended to be a lossless 3D 'slippy map' tiling scheme for point clouds, which can be read into a viewer straight from storage (as for 2D map tiles).
 
 ## EPT or Potree?
 
@@ -13,7 +14,7 @@ Using EPT, the fundamental idea is that the octree becomes the 'hot' data, and t
 
 Both formats create many very small files - which is OK for object storage, less good for moving data around.
 
-## Creating an EPT index
+## Creating an EPT resource
 
 This is actually really easy using dockerised entwine. Taking our RPAS farm sample, try:
 
@@ -34,11 +35,17 @@ While that's running - entwine builds can also be configured with a simple JSON 
 
 ...would run entwine using 6 threads, and reproject the index to web mercator (EPSG:3857).
 
+Entwine configuration details can be found here:
+
+...and ongoing discussion of the EPT format is here:
+
+## Inspecting an EPT resource
+
 
 
 ## viewing an Entwine datasource
 
-Once you've created an Entwine index, start a webserver in the directory you're working in:
+Once you've created an Entwine index, start a web server in the directory you're working in:
 
 `python -m ./resources/simplecorsserver.py 9001`
 
@@ -49,7 +56,9 @@ http://potree.entwine.io/custom.html?r=\"http://localhost:9001/dataset-entwine/\
 
 ## reading an Entwine index with PDAL
 
-A key motivation for using entwine is it's lossless data storage. Let's test that, and PDAL's entwine reader at the same time. So let's set up a pipeline...
+#### Note: this requires PDAL 1.8
+
+A key motivation for using entwine is it's lossless data storage. Let's test that, and PDAL's entwine reader at the same time. So let's set up a pipeline to read our new local EPT resource and write out a LAZ file from the complete dataset:
 
 ```
 {
@@ -64,7 +73,7 @@ A key motivation for using entwine is it's lossless data storage. Let's test tha
 
 ```
 
-...and a PDAL command line to test the results:
+Then use a PDAL command line to test the results:
 
 `pdal diff original.laz back-from-entwine.laz`
 

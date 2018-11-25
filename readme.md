@@ -13,16 +13,16 @@ This repository contains materials for a point cloud processing workshop develop
 
 It uses the [Point Data Abstraction Library](http://pdal.io) (PDAL), [Entwine](http://entwine.io) Python, Numpy, Jupyter notebooks, and the [Potree point cloud visualiser](http://potree.org) to develop some concepts about processing point clouds and visualising results.
 
-![PDAL logo](https://pdal.io/_images/pdal_logo.png)
+![PDAL logo](https://pdal.io/_images/pdal_logo.png)  
 ![Entwine logo](https://entwine.io/_images/entwine_logo_2-color-small.png)
 
 ## Materials
 
-Text relating to the workshop is contained in 'workshop'. Jupyter notebooks used in the workshop are contained in 'exercises'. Any sample data are contained in 'data'. Sample workflows as PDAL pipelines are contained in 'workflows'.
+Text relating to the workshop is contained in [workshop](./workshop). Jupyter notebooks used in the workshop are contained in [notebooks](./notebooks). Sample workflows as PDAL pipelines are contained in [resources](./resources).
 
 ## Preparation
 
-This workshop requires a PDAL installation with python bindings. Using conda is convenient, but a native installation should work just fine as well. However PDAL is installed, it needs to be visible to a Jupyter notebook.
+This workshop requires a PDAL installation with python bindings. Using Conda is convenient, but a native installation should work just fine as well. However PDAL is installed, it needs to be visible to a Jupyter notebook.
 
 Using Conda, create a new virtual environment like:
 

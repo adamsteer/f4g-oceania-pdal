@@ -210,6 +210,6 @@ Meshes can be made the same way, try replacing the `writers.gdal` block with:
 
 ## Summary
 
-Pipelines are the bread and butter of PDAL as a command line application. Re-usable code chunks which are easily readable, and reconfigurable on the fly. 
+Pipelines are the bread and butter of PDAL as a command line application. Re-usable code chunks which are easily readable, and reconfigurable on the fly.
 
 [next - python and PDAL](4-python-and-pdal.md)

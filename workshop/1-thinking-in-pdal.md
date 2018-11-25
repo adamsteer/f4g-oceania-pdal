@@ -20,15 +20,15 @@ In PDAL, `dimensions` are the set of things described in the point cloud data sc
 |Green | Green channel in RGB colour |
 |Blue | Blue channel in RGB colour |
 
-The list of standard PDAL dimensions is here: https://pdal.io/dimensions.html - again, many of these are derived from ASPRS LAS formats. Primarily because it's a data exchange format we can't ignore!
+The list of standard PDAL dimensions is here: https://pdal.io/dimensions.html - again, many of these are derived from ASPRS LAS formats. Primarily because it's a data exchange format we can't ignore, and second - it's a standard, and while never perfect, standards make implementation easier.
 
 ## Stages
 
-A stage is the PDAL way of describing a thing which operates on points. That's it!
+A stage is the PDAL way of describing a processing step which operates on points. That's it!
 
 ## Readers
 
-Readers are a stage which reads in data from a filesystem into a `pointview` - which can be operated on by `filters`. PDAL includes a range of 'built in' readers, and others can be added or removed as plugins as build time. You can also write your own!
+Readers are a stage which reads in data from a filesystem into a `pointview` - which can be operated on by `filters`. PDAL includes a range of 'built in' readers, and others can be added or removed as plugins as build time. You can also write your own.
 
 Reference: https://pdal.io/stages/readers.html
 
@@ -40,9 +40,19 @@ Reftererence: https://pdal.io/stages/filters.html
 
 ## Writers
 
-As the name suggests, writers are a stage which writes out a `pointview` to a file! As for readers, PDAL includes a range of 'built in' writers, and others can be added or removed as plugins as build time. You can also write your own!
+As the name suggests, writers are a stage which writes out a `pointview` to a file! As for readers, PDAL includes a range of 'built in' writers, and others can be added or removed as plugins as build time. You can also write your own.
 
 Reference: https://pdal.io/stages/writers.html
+
+## Convenience applications
+
+PDAL uses convenience applications to wrap stages into one-liners. For example:
+
+`pdal translate -i in.las -o out.las`
+
+...is shorthand for expressing a reader, filter, and writer to translate point data from one format to another.
+
+Reference: https://pdal.io/applications.html
 
 ## Summary
 
