@@ -35,15 +35,13 @@ While that's running - entwine builds can also be configured with a simple JSON 
 
 ...would run entwine using 6 threads, and reproject the index to web mercator (EPSG:3857).
 
-Entwine configuration details can be found here:
-
-...and ongoing discussion of the EPT format is here:
+Entwine configuration details, with ongoing discussion, can be found here: https://github.com/connormanning/entwine/blob/master/doc/entwine-point-tile.md
 
 ## Inspecting an EPT resource
 
+An EPT resource can be inspected on the filesystem where it is created. Navigate to the output directory specified at entwine build time.
 
-
-## viewing an Entwine datasource
+## viewing an EPT resource
 
 Once you've created an Entwine index, start a web server in the directory you're working in:
 
@@ -53,10 +51,9 @@ Once you've created an Entwine index, start a web server in the directory you're
 
 http://potree.entwine.io/custom.html?r=\"http://localhost:9001/dataset-entwine/\"
 
-
 ## reading an Entwine index with PDAL
 
-#### Note: this requires PDAL 1.8
+*Note: this requires PDAL 1.8 with* `readers.ept`
 
 A key motivation for using entwine is it's lossless data storage. Let's test that, and PDAL's entwine reader at the same time. So let's set up a pipeline to read our new local EPT resource and write out a LAZ file from the complete dataset:
 
@@ -81,7 +78,7 @@ Did we make it?
 
 ## Scaling it upward
 
-### Note - this requires PDAL 1.8, which is not yet in stable release
+*Note: this requires PDAL 1.8 with* `readers.ept`
 
 This workshop promised billions of points. So let's try that out.
 

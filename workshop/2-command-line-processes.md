@@ -57,7 +57,7 @@ Reprojecting data is also a useful tool. This moves data from [TM65 Irish grid](
 
 `pdal translate filters.reprojection -i T_316000_235500.laz -o outfile.laz --filters.reprojection.in_srs=EPSG:29902 --filters.reprojection.out_srs=EPSG:32629`
 
-(why would we want to do that? )
+(why would we want to convert from a locally-optimised datum to a global system?)
 
 ## Filtering points
 
@@ -69,10 +69,15 @@ Points can be filtered many ways. We can restrict ranges point dimensions. If po
 
 We can also subset points by geometry using a WKT polygon, shown here:
 
-![clip polygon](../images/dublin-triangle.jpg) 
+![clip polygon](../images/dublin-triangle.jpg)
 
-`pdal translate filters.crop -i T_316000_235500.laz -o outfile.laz --filters.crop.polygon="POLYGON ((316261.303310555 235626.19273016,316328.453964166 235522.105517281,316399.983804495 235578.043293381,316261.303310555 235626.19273016))"`
+```
+pdal translate filters.crop -i T_316000_235500.laz -o outfile.laz --filters.crop.polygon="POLYGON ((316261.303310555 235626.19273016,316328.453964166 235522.105517281,316399.983804495 235578.043293381,316261.303310555 235626.19273016))"
+```
 
+To retrieve a subset of the points:
+
+[add image]
 
 ## Summary
 

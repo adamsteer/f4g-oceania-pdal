@@ -32,8 +32,9 @@ We can also cast these workflows into JSON configuration snippets, and run them 
 
 Just to remind ourselves, the command line equivalent is:
 
-`pdal translate inputfile.las outputfile.laz --filters.reprojection.in_srs="EPSG:32756" --filters.reprojection.out_srs="EPSG:28356"`
-
+```
+pdal translate inputfile.las outputfile.laz --filters.reprojection.in_srs="EPSG:32756" --filters.reprojection.out_srs="EPSG:28356"
+```
 
 However - instead of using increasingly long command line processes, the `pipeline` application allows creation of a library of standard processing tasks as easily-readable JSON files.
 
@@ -144,7 +145,9 @@ Let's modify our pipeline a little to remove the final filter, and write out the
 
 ...and for argument's sake, write out a different filename:
 
-`pdal pipeline rpas-ground.json --writers.las.filename="some-different-file.laz"`
+```
+pdal pipeline rpas-ground.json --writers.las.filename="some-different-file.laz"
+```
 
 We can also modify filter parameters, to tune how points are labelled:
 
