@@ -52,7 +52,7 @@ PDAL uses convenience applications to wrap stages into one-liners. For example:
 
 ...is shorthand for expressing a reader, filter, and writer to translate point data from one format to another.
 
-Reference: https://pdal.io/applications.html
+Reference: https://pdal.io/apps/
 
 ## Summary
 

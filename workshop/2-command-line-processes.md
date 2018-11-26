@@ -27,15 +27,15 @@ We can look for information about points. Try:
 
 More useful is finding points by geographic location. the `query` option to `info` can help:
 
-`pdal info T_316000_235500.laz --query "637301.20, 851217.57, 496.49/3"`
+`pdal info T_316000_235500.laz --query "316200, 235400, 21/3"`
 
-...this will return the three nearest points to the coordinates provided (`/3`). You might use this if you want to find a set of points near ground control, and assess how close they are.
+...this will return the three nearest points to the coordinates provided (`/3`). You might use this if you want to find a set of points near ground control to assess accuracy.
 
-Another super useful convenience application is `density`, although it is aimed at 2.5D data (eg airborne LiDAR). This returns a hex-binned representation of point density in your data, which is easily visualised by QGIS. It's a great and quick QA/QC assessment tool:
+`pdal info T_316000_235500.laz --query "316200, 235400, 21/8"`
 
-`pdal density -i infile.las -o lasdensity.sqlite -f sqlite --sample_size 2`
+...will return coordinates and dimension information for the *N* nearest points as a JSON dump.
 
-What does it tell you? For LIDAR - it shows where you have overlapping flight swaths. It also lets you easily see whether your data collection is relatively uniform.
+**note:** PDAL doesn't check to see if your input point is sane - it returns a result regardless.
 
 ## Simple transformations
 
@@ -67,9 +67,12 @@ Points can be filtered many ways. We can restrict ranges point dimensions. If po
 
 ## Cropping points
 
-We can also subset points by geometry using a WKT polygon:
+We can also subset points by geometry using a WKT polygon, shown here:
+
+![clip polygon](../images/dublin-triangle.jpg) 
 
 `pdal translate filters.crop -i T_316000_235500.laz -o outfile.laz --filters.crop.polygon="POLYGON ((316261.303310555 235626.19273016,316328.453964166 235522.105517281,316399.983804495 235578.043293381,316261.303310555 235626.19273016))"`
+
 
 ## Summary
 
