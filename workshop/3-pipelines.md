@@ -42,7 +42,9 @@ However - instead of using increasingly long command line processes, the `pipeli
 
 Classifying ground points is a fundamental task for point cloud processing. LiDAR data can often exploit 'last returns' for ground classification - and usually any LiDAR you come across in public repositories already has ground points labelled (it's often a requirement in acquisition contracts).
 
-However, sometimes the classification is not amazing - it's hard, especially if the surveyed area contains a mixture of terrain types and objects. Further, if you've just collected an incredible dataset from your RPAS and pushed it through OpenDroneMap, it won't have ground classifications attached to points. So let's makes some, using the RPAS-derived sample `APPF-farm.laz`.
+However, sometimes the classification is not amazing - it's hard, especially if the surveyed area contains a mixture of terrain types and objects. Further, many photogrammetric point clouds won't have ground labels attached to points.
+
+We'll demonstrate ground labelling for RPAS data using the sample `APPF-farm.laz`.
 
 Create a file 'rpas-ground.json' and populate it with:
 ```
@@ -91,15 +93,15 @@ Create a file 'rpas-ground.json' and populate it with:
 
 - using `filters.assign` to label all points as unclassified
 - applying `filters.elm` (extended local minimum) to label 'low points' as noise (ASPRS LAS class 7)
-- then applying `filters.outlier`, using a statisical approach label remaining outlying points as noise
+- then applying `filters.outlier`, using a statisical approach label remaining outlying points as noise (ASPRS LAS class 7)
 - next, using `filters.smrf` (Simple Morphological Filter) to label points as 'ground'
 - ...then finally, removing any points *not* labelled as ground from the output and writing them out to `APPF-ground.laz`
 
 Once you've got an output file, if you have CloudCompare (or another LAS/LAZ viewer), open `APPF-ground.laz` and check the results.
 
-Here we've leaped right into the deep end with a long chain of processing. The point here is showing how it's actually pretty easy - once you know what it is you need to do. We've used a `reader`, a bunch of `filters` chained together to operate on a `pointview`, and exported the result using a `writer`
+We've leaped right into the deep end with a long chain of processing. The point here is showing how it's actually pretty easy - once you know what it is you need to do. We've used a `reader`, a bunch of `filters` chained together to operate on a `pointview`, and exported the result using a `writer`
 
-Try pulling apart the pipeline and running parts of it, or removing some of the filters and see what happens
+Try pulling apart the pipeline and running parts of it, or removing some of the filters and see what happens by viewing results in CloudCompare.
 
 ## Overriding options
 
@@ -153,9 +155,13 @@ We can also modify filter parameters, to tune how points are labelled:
 
 `pdal pipeline rpas-ground.json --filters.elm.cell=20.0 --filters.pmf.initial_distance=0.4`
 
+In short, any option from the stages used in the pipeline can be over-ridden by passing equivalent command line options.
+
+When designing pipelines, try to optimise them such that options which *need* to change often are as few as possible.
+
 ## I want to make a product from my data
 
-We can string together more! In this example we'll create a DTM from the ground points we just created:
+Many end uses of point cloud data are not points at all - but rasters or other data products based on the points. We can string together more! In this example we'll create a DTM from the ground points we just created:
 
 ```
 {
