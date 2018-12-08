@@ -6,7 +6,7 @@ One of the most fundamental tasks we can do is find out about our data - what's 
 
 We'll dive straight in and use PDAL to run a query on a .LAS file we've obtained. Here's a view of the data in CloudCompare:
 
-[add image]
+![Dublin sample dataset](../images/dublin-sample.jpg)
 
 `pdal info T_316000_235500.laz`
 
@@ -65,9 +65,9 @@ Reprojecting data is also a useful tool. This moves data from [TM65 Irish grid](
 
 Points can be filtered many ways. We can restrict ranges point dimensions. If points carry labels (for example ASPRS classifications) we can use PDAL to exclude classes. We can also try to label 'noise' or points we don't think we need to pay attention to. Here, we'll limit elevations to 0-5m above the reference surface:
 
-`pdal translate filters.range -i T_316000_235500.laz -o outfile.laz --filters.range.limits="Z[0:5]"`
+`pdal translate filters.range -i T_316000_235500.laz -o outfile.laz --filters.range.limits="Z[0:10]"`
 
-[add image]
+![Dublin points below 10m](../images/dublin-sub10.jpg)
 
 ## Cropping points
 
@@ -81,7 +81,7 @@ Using the WKT polygon, try:
 pdal translate filters.crop -i T_316000_235500.laz -o outfile.laz --filters.crop.polygon="POLYGON ((316261.303310555 235626.19273016,316328.453964166 235522.105517281,316399.983804495 235578.043293381,316261.303310555 235626.19273016))"
 ```
 
-...to retrieve a subset of the points, shown here:
+...to retrieve a subset of the points, shown here (coloured by classification):
 
 ![clip polygon](../images/dublin-subset-classes.jpg)
 
