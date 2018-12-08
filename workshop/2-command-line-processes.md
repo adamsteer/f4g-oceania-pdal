@@ -4,7 +4,9 @@
 
 One of the most fundamental tasks we can do is find out about our data - what's in it, where it is, and whether there are any problems with it.
 
-We'll dive straight in and use PDAL to run a query on a .LAS file we've obtained.
+We'll dive straight in and use PDAL to run a query on a .LAS file we've obtained. Here's a view of the data in CloudCompare:
+
+[add image]
 
 `pdal info T_316000_235500.laz`
 
@@ -33,7 +35,7 @@ More useful is finding points by geographic location. the `query` option to `inf
 
 `pdal info T_316000_235500.laz --query "316200, 235400, 21/8"`
 
-...will return coordinates and dimension information for the *N* nearest points as a JSON dump.
+...will return coordinates and dimension information for the 8 nearest points as a JSON dump.
 
 **note:** PDAL doesn't check to see if your input point is sane - it returns a result regardless.
 
@@ -61,9 +63,11 @@ Reprojecting data is also a useful tool. This moves data from [TM65 Irish grid](
 
 ## Filtering points
 
-Points can be filtered many ways. We can restrict ranges point dimensions. If points carry labels (for example ASPRS classifications) we can use PDAL to exclude classes. We can also try to label 'noise' or points we don't think we need to pay attention to. Here, we'll limit
+Points can be filtered many ways. We can restrict ranges point dimensions. If points carry labels (for example ASPRS classifications) we can use PDAL to exclude classes. We can also try to label 'noise' or points we don't think we need to pay attention to. Here, we'll limit elevations to 0-5m above the reference surface:
 
 `pdal translate filters.range -i T_316000_235500.laz -o outfile.laz --filters.range.limits="Z[0:5]"`
+
+[add image]
 
 ## Cropping points
 
@@ -71,13 +75,16 @@ We can also subset points by geometry using a WKT polygon, shown here:
 
 ![clip polygon](../images/dublin-triangle.jpg)
 
+Using the WKT polygon, try:
+
 ```
 pdal translate filters.crop -i T_316000_235500.laz -o outfile.laz --filters.crop.polygon="POLYGON ((316261.303310555 235626.19273016,316328.453964166 235522.105517281,316399.983804495 235578.043293381,316261.303310555 235626.19273016))"
 ```
 
-To retrieve a subset of the points:
+...to retrieve a subset of the points, shown here:
 
-[add image]
+![clip polygon](../images/dublin-subset-classes.jpg)
+
 
 ## Summary
 

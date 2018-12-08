@@ -1,0 +1,1 @@
+http://potree.entwine.io/data/custom.html?r="http://melbourne-2018-ept.s3.amazonaws.com/"
