@@ -46,11 +46,11 @@ However, sometimes the classification is not amazing - it's hard, especially if 
 
 We'll demonstrate ground labelling for RPAS data using the sample `APPF-farm-sample.laz`. Here's what the data look like:
 
-![Farm sample](../images/appf-farm-sample.jpg)
+![Farm sample](../images/appf-sample.jpg)
 
 ...and coloured by classification:
 
-![Farm sample](../images/appf-farm-sample-class.jpg)
+![Farm sample](../images/appf-sample-classes.jpg)
 
 It has no classification labels! Let's try to fix that. Create a file 'rpas-ground.json' and populate it with:
 ```
@@ -103,13 +103,15 @@ It has no classification labels! Let's try to fix that. Create a file 'rpas-grou
 - next, using `filters.smrf` (Simple Morphological Filter) to label points as 'ground'
 - ...then finally, removing any points *not* labelled as ground from the output and writing them out to `APPF-ground.laz`
 
-Once you've got an output file, if you have CloudCompare (or another LAS/LAZ viewer), open `APPF-ground.laz` and check the results. Here's a sample, coloured by classification:
+Once you've got an output file, if you have CloudCompare (or another LAS/LAZ viewer), open `APPF-ground.laz` and check the results:
 
+![Farm sample](../images/appf-sample-ground.jpg)
 
+You'll see here only points labelled as 'ground' are returned - we've dropped any noise and unclassified points using a range filter.
 
 We've leaped right into the deep end with a long chain of processing. The point here is showing how it's actually pretty easy - once you know what it is you need to do. We've used a `reader`, a bunch of `filters` chained together to operate on a `pointview`, and exported the result using a `writer`
 
-Try pulling apart the pipeline and running parts of it, or removing some of the filters and see what happens by viewing results in CloudCompare.
+Try pulling apart the pipeline and running parts of it, or removing some of the filters and see what happens by viewing results in CloudCompare. If you haven't already done so, that's the next step
 
 ## Overriding options
 
@@ -117,7 +119,7 @@ In the example above, input and output filenames are fixed, and if we want to al
 
 We can fix that - using either command line overrides, or for clever folks, templating in JSON (we'll get to that shortly using Python).
 
-Let's modify our pipeline a little to remove the final filter, and write out the entire dataset with noise a ground points labelled:
+Let's modify our pipeline a little to remove the final filter, and write out the entire dataset with noise and ground points labelled:
 
 ```
 {
