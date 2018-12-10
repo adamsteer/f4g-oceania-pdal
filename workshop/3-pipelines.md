@@ -11,7 +11,7 @@ We can also cast these workflows into JSON configuration snippets, and run them 
   "pipeline":[
     {
         "type":"readers.las",
-        "filename":"APPF-farm-sample-original.laz"
+        "filename":"APPF-farm-sample.laz"
     },
     {
         "type":"filters.reprojection",
@@ -21,7 +21,7 @@ We can also cast these workflows into JSON configuration snippets, and run them 
     {
         "type":"writers.las",
         "compression": "laszip",
-        "filename":"APPF-farm-sample.laz"
+        "filename":"APPF-farm-sample-reprojected.laz"
     }
   ]
 }
@@ -57,35 +57,36 @@ It has no classification labels! Let's try to fix that. Create a file 'rpas-grou
 {
   "pipeline":[
     {
-        "type":"readers.las",
-        "filename":"APPF-farm-sample.laz"
+      "type":"readers.las",
+      "filename":"APPF-farm-sample.laz"
     },
     {
-        "type":"filters.assign",
-        "assignment":"Classification[:]=0"
+      "type":"filters.assign",
+      "assignment":"Classification[:]=0"
     },
     {
-        "type":"filters.elm",
-        "cell": 10.0,
-        "class": 7,
-        "threshold": 0.5
+      "type":"filters.elm",
+      "cell":20.0,
+      "class": 7,
+      "threshold": 0.5
     },
     {
-        "type":"filters.outlier"
+      "type":"filters.outlier"
     },
     {
-        "type":"filters.pmf",
-        "ignore":"Classification[7:7]",
-        "initial_distance":0.3,
-        "cell_size": 2
+      "type":"filters.smrf",
+      "ignore":"Classification[7:7]",
+      "slope":0.2,
+      "window":20,
+      "threshold":0.1
     },
     {
-        "type":"filters.range",
-        "limits":"Classification[2:2]"
+      "type":"filters.range",
+      "limits":"Classification[2:2]"
     },
     {
-        "type":"writers.las",
-        "filename":"APPF-ground-pmf.laz"
+      "type":"writers.las",
+      "filename":"APPF-ground-20.laz"
     }
   ]
 }
@@ -100,26 +101,26 @@ It has no classification labels! Let's try to fix that. Create a file 'rpas-grou
 - using `filters.assign` to label all points as unclassified
 - applying `filters.elm` (extended local minimum) to label 'low points' as noise (ASPRS LAS class 7)
 - then applying `filters.outlier`, using a statisical approach label remaining outlying points as noise (ASPRS LAS class 7)
-- next, using `filters.pmf` (Progressive Morphological Filter) to label points as 'ground', ignoring any points already labelled as 'noise'
+- next, using `filters.smrf` (Simple Morphological Filter) to label points as 'ground', ignoring any points already labelled as 'noise'
 - ...then finally, removing any points *not* labelled as ground from the output and writing them out to `APPF-ground-pmf.laz`
 
 Once you've got an output file, if you have CloudCompare (or another LAS/LAZ viewer), open `APPF-ground-pmf.laz` and check the results:
 
-![Farm sample](../images/appf-sample-ground.jpg)
+![Farm sample](../images/appf-ground-smrf-20.jpg)
 
-You'll see here only points labelled as 'ground' are returned - we've dropped any noise and unclassified points using a range filter.
+You'll see here only points labelled as 'ground' are returned - we've dropped any noise and unclassified points using a range filter. It's also not the best segmentation of 'ground' points - a stand of trees has been mislabelled!
 
-We've leaped right into the deep end with a long chain of processing. The point here is showing how it's actually pretty easy - once you know what it is you need to do. We've used a `reader`, a bunch of `filters` chained together to operate on a `pointview`, and exported the result using a `writer`
+We've also leaped right into the deep end with a long chain of processing. The point here is showing how it's actually pretty easy - once you know what it is you need to do. We've used a `reader`, a bunch of `filters` chained together to operate on a `pointview`, and exported the result using a `writer`
 
 Try pulling apart the pipeline and running parts of it, or removing some of the filters and see what happens by viewing results in CloudCompare. If you haven't already done so, that's the next step
 
-## Overriding options
+## Overriding options, and making better ground
 
 In the example above, input and output filenames are fixed, and if we want to alter parameters we need to go edit a JSON file and re run everything. That's a little painful, especially if you have a thousand tiles to process!
 
 We can fix that - using either command line overrides, or for clever folks, templating in JSON (we'll get to that shortly using Python).
 
-Let's modify our pipeline a little to remove the final filter, and write out the entire dataset with noise and ground points labelled:
+Let's modify our pipeline a little to remove the final filter, and write out the entire dataset with noise and ground points labelled. We'll also try another built-in ground segmentation method, the Progressive Morphological Filter: `filters.pmf`. Write this out as `rpas-ground-pmf.json`
 
 ```
 {
@@ -224,6 +225,10 @@ Many end uses of point cloud data are not points at all - but rasters or other d
 ```
 ...you can open the result in QGIS and take a look. Here's a preview:
 
+(PDALDTM in QGIS)[../images/QGIS-dtm.jpg]
+
+Note that PDAL does not handle DTM filling - that's left to tools which do the job better (for example GDAL)
+
 Meshes can be made the same way, try replacing the `writers.gdal` block with:
 ```
     {
@@ -237,8 +242,7 @@ Meshes can be made the same way, try replacing the `writers.gdal` block with:
 
 ...to make a ground mesh - and then removing the range filter to create a surface mesh (this might take a while). Again, here's a sample, viewed in meshlab:
 
-(RPAS classification)[../images/rpas-classification1.jpg]
-
+(Meshlab mesh)[../images/Meshlab-mesh.jpg]
 
 
 ## Summary
