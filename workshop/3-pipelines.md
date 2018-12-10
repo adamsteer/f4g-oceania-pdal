@@ -44,15 +44,15 @@ Classifying ground points is a fundamental task for point cloud processing. LiDA
 
 However, sometimes the classification is not amazing - it's hard, especially if the surveyed area contains a mixture of terrain types and objects. Further, many photogrammetric point clouds won't have ground labels attached to points.
 
-We'll demonstrate ground labelling for RPAS data using the sample `APPF-farm.laz`. Here's what the data look like:
+We'll demonstrate ground labelling for RPAS data using the sample `APPF-farm-sample.laz`. Here's what the data look like:
 
+![Farm sample](../images/appf-farm-sample.jpg)
 
 ...and coloured by classification:
 
+![Farm sample](../images/appf-farm-sample-class.jpg)
 
-
-
-Create a file 'rpas-ground.json' and populate it with:
+It has no classification labels! Let's try to fix that. Create a file 'rpas-ground.json' and populate it with:
 ```
 {
   "pipeline":[
