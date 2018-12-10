@@ -163,9 +163,9 @@ pdal pipeline rpas-ground-pmf.json --writers.las.filename="APPF-ground-allthepoi
 
 ...which looks like:
 
-(RPAS classification)[../images/rpas-pmf-pass1.jpg]
+!(RPAS classification)[../images/appf-sample-pmf.jpg]
 
-(RPAS classification)[../images/rpas-pmf-pass1-classes.jpg]
+!(RPAS classification)[../images/appf-sample-pmf-classes.jpg]
 
 We can also modify filter parameters, to tune how points are labelled:
 
@@ -175,7 +175,7 @@ pdal pipeline rpas-ground.json --filters.elm.cell=20.0 --filters.pmf.initial_dis
 
 ...which results in:
 
-(RPAS classification)[../images/rpas-pmf-pass2-classes.jpg]
+!(RPAS classification)[../images/rpas-pmf-pass2-classes.jpg]
 
 In short, any option from the stages used in the pipeline can be over-ridden by passing equivalent command line options. H
 
