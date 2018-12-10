@@ -85,7 +85,7 @@ It has no classification labels! Let's try to fix that. Create a file 'rpas-grou
     },
     {
         "type":"writers.las",
-        "filename":"APPF-ground-20-pmf.laz"
+        "filename":"APPF-ground-pmf.laz"
     }
   ]
 }
@@ -100,10 +100,10 @@ It has no classification labels! Let's try to fix that. Create a file 'rpas-grou
 - using `filters.assign` to label all points as unclassified
 - applying `filters.elm` (extended local minimum) to label 'low points' as noise (ASPRS LAS class 7)
 - then applying `filters.outlier`, using a statisical approach label remaining outlying points as noise (ASPRS LAS class 7)
-- next, using `filters.smrf` (Simple Morphological Filter) to label points as 'ground'
-- ...then finally, removing any points *not* labelled as ground from the output and writing them out to `APPF-ground.laz`
+- next, using `filters.pmf` (Progressive Morphological Filter) to label points as 'ground', ignoring any points already labelled as 'noise'
+- ...then finally, removing any points *not* labelled as ground from the output and writing them out to `APPF-ground-pmf.laz`
 
-Once you've got an output file, if you have CloudCompare (or another LAS/LAZ viewer), open `APPF-ground.laz` and check the results:
+Once you've got an output file, if you have CloudCompare (or another LAS/LAZ viewer), open `APPF-ground-pmf.laz` and check the results:
 
 ![Farm sample](../images/appf-sample-ground.jpg)
 
@@ -158,7 +158,7 @@ Let's modify our pipeline a little to remove the final filter, and write out the
 ...and for argument's sake, write out a different filename:
 
 ```
-pdal pipeline rpas-ground.json --writers.las.filename="some-different-file.laz"
+pdal pipeline rpas-ground.json --writers.las.filename="APPF-ground-allthepoints.laz"
 ```
 
 ...which looks like:
@@ -167,7 +167,9 @@ pdal pipeline rpas-ground.json --writers.las.filename="some-different-file.laz"
 
 We can also modify filter parameters, to tune how points are labelled:
 
-`pdal pipeline rpas-ground.json --filters.elm.cell=20.0 --filters.pmf.initial_distance=0.4`
+```
+pdal pipeline rpas-ground.json --filters.elm.cell=20.0 --filters.pmf.initial_distance=0.4 --writers.las.filename="APPF-ground-allthepoints-elm20.laz"
+```
 
 ...which results in:
 
