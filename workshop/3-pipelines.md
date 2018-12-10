@@ -65,20 +65,13 @@ It has no classification labels! Let's try to fix that. Create a file 'rpas-grou
       "assignment":"Classification[:]=0"
     },
     {
-      "type":"filters.elm",
-      "cell":20.0,
-      "class": 7,
-      "threshold": 0.5
+      "type":"filters.elm"
     },
     {
       "type":"filters.outlier"
     },
     {
-      "type":"filters.smrf",
-      "ignore":"Classification[7:7]",
-      "slope":0.2,
-      "window":20,
-      "threshold":0.1
+      "type":"filters.smrf"
     },
     {
       "type":"filters.range",
@@ -86,7 +79,7 @@ It has no classification labels! Let's try to fix that. Create a file 'rpas-grou
     },
     {
       "type":"writers.las",
-      "filename":"APPF-ground-20.laz"
+      "filename":"APPF-ground-default.laz"
     }
   ]
 }
@@ -102,11 +95,11 @@ It has no classification labels! Let's try to fix that. Create a file 'rpas-grou
 - applying `filters.elm` (extended local minimum) to label 'low points' as noise (ASPRS LAS class 7)
 - then applying `filters.outlier`, using a statisical approach label remaining outlying points as noise (ASPRS LAS class 7)
 - next, using `filters.smrf` (Simple Morphological Filter) to label points as 'ground', ignoring any points already labelled as 'noise'
-- ...then finally, removing any points *not* labelled as ground from the output and writing them out to `APPF-ground-20.laz`
+- ...then finally, removing any points *not* labelled as ground from the output and writing them out to `APPF-ground-default.laz`
 
-Once you've got an output file, if you have CloudCompare (or another LAS/LAZ viewer), open `APPF-ground-20.laz` and check the results:
+Once you've got an output file, if you have CloudCompare (or another LAS/LAZ viewer), open `APPF-ground-default.laz` and check the results:
 
-![Farm sample](../images/appf-ground-smrf-20.jpg)
+![Farm sample](../images/appf-ground-default.jpg)
 
 You'll see here only points labelled as 'ground' are returned - we've dropped any noise and unclassified points using a range filter. It's also not the best segmentation of 'ground' points - a stand of trees has been mislabelled!
 
@@ -120,14 +113,14 @@ In the example above, input and output filenames are fixed, and if we want to al
 
 We can fix that - using either command line overrides, or for clever folks, templating in JSON (we'll get to that shortly using Python).
 
-Let's modify our pipeline a little to remove the final filter, and write out the entire dataset with noise and ground points labelled. We'll also try another built-in ground segmentation method, the Progressive Morphological Filter: `filters.pmf`. Write this out as `rpas-ground-pmf.json`
+Let's modify our pipeline a little to remove the final filter, and write out the entire dataset with noise and ground points labelled. Write the next JSON block out as `rpas-ground-allthepoints.json`
 
 ```
 {
   "pipeline":[
     {
         "type":"readers.las",
-      "filename":"APPF-farm-sample.laz"
+        "filename":"APPF-farm-sample.laz"
     },
     {
         "type":"filters.assign",
@@ -135,47 +128,31 @@ Let's modify our pipeline a little to remove the final filter, and write out the
     },
     {
         "type":"filters.elm",
-        "cell": 10.0,
-        "class": 7,
-        "threshold": 0.5
     },
     {
         "type":"filters.outlier"
     },
     {
-        "type":"filters.pmf",
-        "ignore":"Classification[7:7]",
-        "initial_distance":0.3,
+        "type":"filters.smrf",
+        "ignore":"Classification[7:7]"
     },
     {
         "type":"writers.las",
-        "filename":"APPF-ground-pmf.laz"
+        "filename":"APPF-ground-smrf-allthepoints.laz"
     }
   ]
 }
 ```
 
-...and for argument's sake, write out a different filename:
+...and pass in some non-default parameters for `filters.smrf`. The set used here were obtained by trial-and-error - experiment and see what changes you get:
 
 ```
-pdal pipeline rpas-ground-pmf.json --writers.las.filename="APPF-ground-allthepoints-pmf.laz"
+pdal pipeline rpas-ground-allthepoints.json --filters.smrf.slope=0.1 --filters.smrf.window=30 --filters.smrf.threshold=0.4
 ```
 
 ...which looks like:
 
-![RPAS classification](../images/appf-sample-pmf.jpg)
-
-![RPAS classification](../images/appf-sample-pmf-classes.jpg)
-
-We can also modify filter parameters, to tune how points are labelled:
-
-```
-pdal pipeline rpas-ground.json --filters.elm.cell=20.0 --filters.pmf.initial_distance=0.4 --writers.las.filename="APPF-ground-allthepoints-pmf-elm20.laz"
-```
-
-...which results in:
-
-!(RPAS classification)[../images/rpas-pmf-pass2-classes.jpg]
+![RPAS classification](../images/appf-ground-modparams.jpg)
 
 In short, any option from the stages used in the pipeline can be over-ridden by passing equivalent command line options. H
 
@@ -197,19 +174,14 @@ Many end uses of point cloud data are not points at all - but rasters or other d
         "assignment":"Classification[:]=0"
     },
     {
-        "type":"filters.elm",
-        "cell": 10.0,
-        "class": 7,
-        "threshold": 0.5
+        "type":"filters.elm"
     },
     {
         "type":"filters.outlier"
     },
     {
-        "type":"filters.pmf",
-        "ignore":"Classification[7:7]",
-        "initial_distance":0.3,
-        "cell_size": 2
+        "type":"filters.smrf",
+        "ignore":"Classification[7:7]"
     },
     {
         "type":"filters.range",
