@@ -109,11 +109,11 @@ Try pulling apart the pipeline and running parts of it, or removing some of the 
 
 ## Overriding options, and making better ground
 
-In the example above, input and output filenames are fixed, and if we want to alter parameters we need to go edit a JSON file and re run everything. That's a little painful, especially if you have a thousand tiles to process!
+An easy assumption using pipelines is that everything is fixed to the parameters given in the JSON configuration. That's a little painful, especially if you have a thousand tiles to process!
 
 We can fix that - using either command line overrides, or for clever folks, templating in JSON (we'll get to that shortly using Python).
 
-Let's modify our pipeline a little to remove the final filter, and write out the entire dataset with noise and ground points labelled. Write the next JSON block out as `rpas-ground-allthepoints.json`
+Let's modify our pipeline a little to remove the final filter, and write out the entire dataset with noise and ground points labelled. We will then pass in some non-default `filters.smrf` options. Write the next JSON block out as `rpas-ground-allthepoints.json`
 
 ```
 {
@@ -144,23 +144,27 @@ Let's modify our pipeline a little to remove the final filter, and write out the
 }
 ```
 
-...and pass in some non-default parameters for `filters.smrf`. The set used here were obtained by trial-and-error - experiment and see what changes you get:
+Now, invoke PDAL with some custom options to `filters.smrf`. The set used here were obtained by trial-and-error - experiment and see what changes you get:
 
 ```
 pdal pipeline rpas-ground-allthepoints.json --filters.smrf.slope=0.1 --filters.smrf.window=30 --filters.smrf.threshold=0.4
 ```
 
-...which looks like:
+Visualising the ground points from this process, we see that we've managed to remove the unwanted treetops:
 
 ![RPAS classification](../images/appf-ground-modparams.jpg)
 
-In short, any option from the stages used in the pipeline can be over-ridden by passing equivalent command line options. H
+In order to do this, we let `filters.smrf` know that our ground is flatter than the default option (`slope=0.1`), our non-ground items might be wider than the default expectation (`window=30`), and our noise level might be a little higher (`threshold=0.4`).
+
+In short, any option from the stages used in the pipeline can be over-ridden by passing equivalent command line options. How might you write out a different filename, for example?
+
+(hint - look at options for `writers.las`)
 
 When designing pipelines, try to optimise them such that options which *need* to change often are as few as possible.
 
 ## I want to make a product from my data
 
-Many end uses of point cloud data are not points at all - but rasters or other data products based on the points. We can string together more! In this example we'll create a DTM from the ground points we just created:
+Many end uses of point cloud data are not points at all - but rasters or other data products based on the points. We can string together more! In this example we'll create a DTM from the ground points we just created. Since we've experimentally determined good values for ground segmentation, we'll put those in the pipeline JSON:
 
 ```
 {
@@ -181,16 +185,19 @@ Many end uses of point cloud data are not points at all - but rasters or other d
     },
     {
         "type":"filters.smrf",
-        "ignore":"Classification[7:7]"
+        "ignore":"Classification[7:7]",
+        "slope":0.1,
+        "window":30,
+        "threshold":0.4
     },
     {
         "type":"filters.range",
         "limits":"Classification[2:2]"
-    }
+    },
     {
         "type":"writers.gdal",
-        "filename":"APPF-ground.tiff",
-        "resolution":1
+        "filename":"APPF-dtm.tiff",
+        "resolution":1,
         "output_type":"idw"
     }
   ]
@@ -198,7 +205,7 @@ Many end uses of point cloud data are not points at all - but rasters or other d
 ```
 ...you can open the result in QGIS and take a look. Here's a preview:
 
-(PDALDTM in QGIS)[../images/QGIS-dtm.jpg]
+![PDALDTM in QGIS](../images/QGIS-dtm-smrf.jpg)
 
 Note that PDAL does not handle DTM filling - that's left to tools which do the job better (for example GDAL)
 
@@ -215,7 +222,7 @@ Meshes can be made the same way, try replacing the `writers.gdal` block with:
 
 ...to make a ground mesh - and then removing the range filter to create a surface mesh (this might take a while). Again, here's a sample, viewed in meshlab:
 
-(Meshlab mesh)[../images/Meshlab-mesh.jpg]
+![Meshlab mesh](../images/rpas-meshlab-mesh.jpg)
 
 
 ## Summary
