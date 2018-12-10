@@ -146,7 +146,6 @@ Let's modify our pipeline a little to remove the final filter, and write out the
         "type":"filters.pmf",
         "ignore":"Classification[7:7]",
         "initial_distance":0.3,
-        "cell_size": 2
     },
     {
         "type":"writers.las",
@@ -159,22 +158,24 @@ Let's modify our pipeline a little to remove the final filter, and write out the
 ...and for argument's sake, write out a different filename:
 
 ```
-pdal pipeline rpas-ground.json --writers.las.filename="APPF-ground-allthepoints.laz"
+pdal pipeline rpas-ground-pmf.json --writers.las.filename="APPF-ground-allthepoints-pmf.laz"
 ```
 
 ...which looks like:
 
-(RPAS classification)[../images/rpas-classification1.jpg]
+(RPAS classification)[../images/rpas-pmf-pass1.jpg]
+
+(RPAS classification)[../images/rpas-pmf-pass1-classes.jpg]
 
 We can also modify filter parameters, to tune how points are labelled:
 
 ```
-pdal pipeline rpas-ground.json --filters.elm.cell=20.0 --filters.pmf.initial_distance=0.4 --writers.las.filename="APPF-ground-allthepoints-elm20.laz"
+pdal pipeline rpas-ground.json --filters.elm.cell=20.0 --filters.pmf.initial_distance=0.4 --writers.las.filename="APPF-ground-allthepoints-pmf-elm20.laz"
 ```
 
 ...which results in:
 
-(RPAS classification modification)[../images/rpas-classification2.jpg]
+(RPAS classification)[../images/rpas-pmf-pass2-classes.jpg]
 
 In short, any option from the stages used in the pipeline can be over-ridden by passing equivalent command line options. H
 
