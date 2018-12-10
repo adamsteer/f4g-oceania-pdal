@@ -102,9 +102,9 @@ It has no classification labels! Let's try to fix that. Create a file 'rpas-grou
 - applying `filters.elm` (extended local minimum) to label 'low points' as noise (ASPRS LAS class 7)
 - then applying `filters.outlier`, using a statisical approach label remaining outlying points as noise (ASPRS LAS class 7)
 - next, using `filters.smrf` (Simple Morphological Filter) to label points as 'ground', ignoring any points already labelled as 'noise'
-- ...then finally, removing any points *not* labelled as ground from the output and writing them out to `APPF-ground-pmf.laz`
+- ...then finally, removing any points *not* labelled as ground from the output and writing them out to `APPF-ground-20.laz`
 
-Once you've got an output file, if you have CloudCompare (or another LAS/LAZ viewer), open `APPF-ground-pmf.laz` and check the results:
+Once you've got an output file, if you have CloudCompare (or another LAS/LAZ viewer), open `APPF-ground-20.laz` and check the results:
 
 ![Farm sample](../images/appf-ground-smrf-20.jpg)
 
@@ -163,9 +163,9 @@ pdal pipeline rpas-ground-pmf.json --writers.las.filename="APPF-ground-allthepoi
 
 ...which looks like:
 
-!(RPAS classification)[../images/appf-sample-pmf.jpg]
+![RPAS classification](../images/appf-sample-pmf.jpg)
 
-!(RPAS classification)[../images/appf-sample-pmf-classes.jpg]
+![RPAS classification](../images/appf-sample-pmf-classes.jpg)
 
 We can also modify filter parameters, to tune how points are labelled:
 
