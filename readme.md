@@ -56,9 +56,17 @@ To visualise some data products, please ensure you have:
 
 ### Sample data
 
-Please download the .laz format datasets found here: https://s3.amazonaws.com/f4g-pdal-workshop-sampledata/
+For command line processing and demonstrating PDAL in Python we'll use:
+https://s3.amazonaws.com/f4g-pdal-workshop-sampledata/T_316000_235500.laz
 
-...ahead of the workshop. We'll use those for the exercises.
+This data sample comes from the New York University LiDAR survey of Dublin, Ireland: https://geo.nyu.edu/catalog/nyu-2451-38684
+
+For PDAL pipelines and Entwine we'll use:
+https://s3.amazonaws.com/f4g-pdal-workshop-sampledata/APPF-farm-sample.laz
+
+This data sample is a photogrammetric point cloud collected by the Australian Plant Phenomics Facility (http://appf.edu.au).
+
+Please download these ahead of the workshop.
 
 ## Usage
 

@@ -44,7 +44,13 @@ Classifying ground points is a fundamental task for point cloud processing. LiDA
 
 However, sometimes the classification is not amazing - it's hard, especially if the surveyed area contains a mixture of terrain types and objects. Further, many photogrammetric point clouds won't have ground labels attached to points.
 
-We'll demonstrate ground labelling for RPAS data using the sample `APPF-farm.laz`.
+We'll demonstrate ground labelling for RPAS data using the sample `APPF-farm.laz`. Here's what the data look like:
+
+
+...and coloured by classification:
+
+
+
 
 Create a file 'rpas-ground.json' and populate it with:
 ```
@@ -97,7 +103,9 @@ Create a file 'rpas-ground.json' and populate it with:
 - next, using `filters.smrf` (Simple Morphological Filter) to label points as 'ground'
 - ...then finally, removing any points *not* labelled as ground from the output and writing them out to `APPF-ground.laz`
 
-Once you've got an output file, if you have CloudCompare (or another LAS/LAZ viewer), open `APPF-ground.laz` and check the results.
+Once you've got an output file, if you have CloudCompare (or another LAS/LAZ viewer), open `APPF-ground.laz` and check the results. Here's a sample, coloured by classification:
+
+
 
 We've leaped right into the deep end with a long chain of processing. The point here is showing how it's actually pretty easy - once you know what it is you need to do. We've used a `reader`, a bunch of `filters` chained together to operate on a `pointview`, and exported the result using a `writer`
 
@@ -151,11 +159,19 @@ Let's modify our pipeline a little to remove the final filter, and write out the
 pdal pipeline rpas-ground.json --writers.las.filename="some-different-file.laz"
 ```
 
+...which looks like:
+
+(RPAS classification)[../images/rpas-classification1.jpg]
+
 We can also modify filter parameters, to tune how points are labelled:
 
 `pdal pipeline rpas-ground.json --filters.elm.cell=20.0 --filters.pmf.initial_distance=0.4`
 
-In short, any option from the stages used in the pipeline can be over-ridden by passing equivalent command line options.
+...which results in:
+
+(RPAS classification modification)[../images/rpas-classification2.jpg]
+
+In short, any option from the stages used in the pipeline can be over-ridden by passing equivalent command line options. H
 
 When designing pipelines, try to optimise them such that options which *need* to change often are as few as possible.
 
@@ -202,7 +218,7 @@ Many end uses of point cloud data are not points at all - but rasters or other d
   ]
 }
 ```
-...you can open the result in QGIS and take a look.
+...you can open the result in QGIS and take a look. Here's a preview:
 
 Meshes can be made the same way, try replacing the `writers.gdal` block with:
 ```
@@ -215,7 +231,11 @@ Meshes can be made the same way, try replacing the `writers.gdal` block with:
     }
 ```
 
-...to make a ground mesh - and then removing the range filter to create a surface mesh (this might take a while)!
+...to make a ground mesh - and then removing the range filter to create a surface mesh (this might take a while). Again, here's a sample, viewed in meshlab:
+
+(RPAS classification)[../images/rpas-classification1.jpg]
+
+
 
 ## Summary
 
