@@ -59,8 +59,6 @@ Please give feedback! Use the post-it notes to provide anonymous feedback. We'll
 #### Entwine
 [20 min] Introduction to Entwine; creating an entwine EPT index; Setting up and viewing entwine datasets on a local web server
 
-#### A fun project - mini hackfest
-[??] Taking public data and making it better!
 
 #### Future visions and discussion
 
