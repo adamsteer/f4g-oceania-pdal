@@ -4,13 +4,15 @@ Once upon a time this would have been a LiDAR workshop. Until mid-2006 when Stru
 
 ## What do we mean by 'point cloud'?
 
-A point cloud is generally a collection of vertices in 3D space, described by coordinates at each vertex, without a regular structure. An example is shown below - giving a sample of points from an airborne LiDAR dataset overlaid on a regular gridded surface.
+A point cloud is generally a collection of vertices in 3D space, described by coordinates at each vertex, without a regular structure. An example is shown below - giving a sample of points from an airborne LiDAR dataset from a paved surface, shown around a least-squares fitted plane.
 
-[image]
+![point cloud detail - top](../images/point-clouds-detail-1.jpg)
 
 If we tilt the view, we see that point clouds are irregular in all three dimensions - and for photogrammetric clouds, even irregular in time, since each vertex represents an integration over time of a few images showing hopefully the same object!
 
-[tilted view]
+![point cloud detail - side](../images/point-clouds-detail-2.jpg)
+
+Both LiDAR and photogrammetric point clouds are slightly inexact representations of the objects being measured - although the uncertainty of measurement is generally well understood.
 
 ## What's special about point clouds?
 
