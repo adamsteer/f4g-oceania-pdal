@@ -22,4 +22,4 @@ PDAL doesn't do everything for you. We did no parallel tasking here - PDAL is si
 
 What do you see? Discussion time...
 
-[Acknowledgements](8-acknowledgements.md)
+[Acknowledgements](7-acknowledgements.md)
