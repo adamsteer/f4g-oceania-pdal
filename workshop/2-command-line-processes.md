@@ -63,7 +63,7 @@ Reprojecting data is also a useful tool. This moves data from [TM65 Irish grid](
 
 ## Filtering points
 
-Points can be filtered many ways. We can restrict ranges point dimensions. If points carry labels (for example ASPRS classifications) we can use PDAL to exclude classes. We can also try to label 'noise' or points we don't think we need to pay attention to. Here, we'll limit elevations to 0-5m above the reference surface:
+Points can be filtered many ways. We can restrict ranges point dimensions. If points carry labels (for example ASPRS classifications) we can use PDAL to exclude classes. We can also try to label 'noise' or points we don't think we need to pay attention to. Here, we'll limit elevations to anything between 0 and 10m above the reference surface:
 
 `pdal translate filters.range -i T_316000_235500.laz -o outfile.laz --filters.range.limits="Z[0:10]"`
 
