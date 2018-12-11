@@ -4,7 +4,7 @@
 
 One of the most fundamental tasks we can do is find out about our data - what's in it, where it is, and whether there are any problems with it.
 
-We'll dive straight in and use PDAL to run a query on a .LAS file we've obtained. Here's a view of the data in CloudCompare:
+We'll dive straight in and use PDAL to run a query on a .LAS file we've obtained from the New York University LiDAR survey of Dublin (Ireland). Here's a view of the data in CloudCompare:
 
 ![Dublin sample dataset](../images/dublin-sample.jpg)
 
