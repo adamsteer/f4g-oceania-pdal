@@ -187,7 +187,7 @@ Many end uses of point cloud data are not points at all - but rasters or other d
         "type":"filters.smrf",
         "ignore":"Classification[7:7]",
         "slope":0.1,
-        "window":30,
+        "window":60,
         "threshold":0.4
     },
     {
@@ -196,7 +196,7 @@ Many end uses of point cloud data are not points at all - but rasters or other d
     },
     {
         "type":"writers.gdal",
-        "filename":"APPF-dtm.tiff",
+        "filename":"rpas-dtm.tiff",
         "resolution":1,
         "output_type":"idw"
     }
@@ -207,22 +207,9 @@ Many end uses of point cloud data are not points at all - but rasters or other d
 
 ![PDALDTM in QGIS](../images/QGIS-dtm-smrf.jpg)
 
-Note that PDAL does not handle DTM filling - that's left to tools which do the job better (for example GDAL)
+Note that PDAL does not handle DTM filling - that's left to tools which do the job better (for example GDAL).
 
-Meshes can be made the same way, try replacing the `writers.gdal` block with:
-```
-    {
-        "type":"filters.poisson"
-    },
-    {
-        "type":"writers.ply",
-        "filename":"APPF-ground.ply"
-    }
-```
-
-...to make a ground mesh - and then removing the range filter to create a surface mesh (this might take a while). Again, here's a sample, viewed in meshlab:
-
-![Meshlab mesh](../images/rpas-meshlab-mesh.jpg)
+Also note that we didn't quite remove all the tree points. Working from a ground-first approach may not be the best strategy here. Perhaps with RPAS data, we should identify all the other things (buildings, trees...) and call the leftover points either ground or noise (see, for example: https://smathermather.com/2018/12/07/classifying-point-clouds-with-cgal/)
 
 
 ## Summary
