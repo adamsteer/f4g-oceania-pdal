@@ -18,7 +18,7 @@ Both formats create many very small files - which is OK for object storage, less
 
 This is actually really easy using dockerised entwine. Taking our RPAS farm sample, try:
 
-`docker run -it -v $(pwd):/opt/data connormanning/entwine -i /opt/data/APPF-ground-smrf-allthepoints.laz -o /opt/data/APPF-classified`
+`docker run -it -v $(pwd):/opt/data connormanning/entwine -i /opt/data/APPF-ground-smrf-allthepoints.laz -o /opt/data/appf-ground-sample`
 
 While that's running - entwine builds can also be configured with a simple JSON file, for example:
 
@@ -31,7 +31,7 @@ While that's running - entwine builds can also be configured with a simple JSON 
 
 ...saved as `web-mercator.json` and run as:
 
-`docker run -it -v $(pwd):/opt/data connormanning/entwine web-mercator.json -i /opt/data/APPF-ground-smrf-allthepoints.laz -o /opt/data/APPF-classified-webmercator`
+`docker run -it -v $(pwd):/opt/data connormanning/entwine web-mercator.json -i /opt/data/APPF-ground-smrf-allthepoints.laz -o /opt/data/appf-ground-sample-webmercator`
 
 ...would run entwine using 6 threads, and reproject the index to web mercator (EPSG:3857).
 
@@ -55,7 +55,11 @@ Once you've created an Entwine index, start a web server in the directory you're
 
 ...and navigate to http://potree.entwine.io. Modify the URL to something like:
 
-http://potree.entwine.io/custom.html?r=\"http://localhost:9001/dataset-entwine/\"
+http://potree.entwine.io/custom.html?r=\"http://localhost:9001/appf-ground-sample/\"
+
+You should see something like this:
+
+![APPF EPT sample](../images/appf-ept-sample.jpg)
 
 ## reading an Entwine index with PDAL
 
@@ -68,9 +72,9 @@ A key motivation for using entwine is it's lossless data storage. Let's test tha
   "pipeline": [
     {
       "type": "readers.ept",
-      "filename": "ept://APPF-classified",
+      "filename": "ept://opt/data/appf-ground-sample"
     },
-    "back-from-entwine.laz"
+    "/opt/data/back-from-entwine.laz"
   ]
 }
 
@@ -80,7 +84,7 @@ Then use a PDAL command line to test the results:
 
 `pdal diff APPF-ground-smrf-allthepoints.laz back-from-entwine.laz`
 
-Did we make it?
+Did we make it? `pdal diff` is being fixed as of writing this - try loading the two datasets in CloudCompare and running a cloud to cloud comparison.
 
 ## Scaling it upward
 
@@ -128,5 +132,6 @@ Your own, on demand DSM from a clipped region via a web request!
 
 # Summary
 
+Entwine and Entwine Point Tiles are a powerful tool for organising point data for visualisation and exploitation using the PDAL toolbox. While there are overheads in processing, this system represents a hge leap in how we can think about managing massive point cloud datasets as fundamental infrastructure.
 
 [next - wrapping up](6-wrapup.md)
