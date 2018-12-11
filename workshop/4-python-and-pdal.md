@@ -6,8 +6,6 @@ In order to make it go, PDAL needs to be compiled with Python bindings. Fortunat
 
 ## Using Python functions in pipelines
 
-[to do - add MH370 sample]
-
 Python functions can be run as part of a `pipeline` using `filters.python`. This is handy for customised processing - for example reducing colour bitness, or inverting a dimension. Here's an example pipeline calling a Python function to invert the Z Dimension for a multibeam SONAR dataset. To keep you on your toes, I've introduced a new `readers.text` here - and show a way to go from XYZ to LAZ (or any PDAL writable format)
 
 ```

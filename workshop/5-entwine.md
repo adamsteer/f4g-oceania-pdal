@@ -45,7 +45,7 @@ An EPT resource can be inspected on the filesystem where it is created. Navigate
 - `ept-build.json` holds some Entwine-specific build configuration data
 - `ept-data` holds the point cloud data, with octree relationships prepended to file names
 - `ept-hierarchy` holds a JSON file telling us how many points are stored in each node
-- `ept-sources` holds PDAL readable metadata about each source file in the build
+- `ept-sources` holds PDAL-style metadata about each source file in the build
 
 ## viewing an EPT resource
 
