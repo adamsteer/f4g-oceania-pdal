@@ -1,6 +1,6 @@
 # Entwine - massive point cloud organisation
 
-Entwine is an application which reorganises data into [https://en.wikipedia.org/wiki/Octree](octree) structures, using the Entwine Point Tile (EPT) format. The emerging specification is shown here:
+Entwine is an application which reorganises data into [octree](https://en.wikipedia.org/wiki/Octree) structures, using the Entwine Point Tile (EPT) format. The emerging specification is shown here:
 
 https://github.com/connormanning/entwine/blob/master/doc/entwine-point-tile.md
 
