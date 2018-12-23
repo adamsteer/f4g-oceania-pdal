@@ -92,7 +92,7 @@ Did we make it? `pdal diff` is being fixed as of writing this - try loading the 
 
 This workshop promised billions of points. So let's try that out using the ACT Government's 2015 LiDAR survey. It covers 1600 sqaure kilometres, and in total contains 30 billion points.
 
-Point a web browser at: http://potree.entwine.io/data/custom.html?r="http://act2015-rgb-ept.s3.amazonaws.com/"
+Point a web browser at: http://potree.entwine.io/data/au-act-2015.html
 
 ...and have an explore. Here's a screenshot from Parliament House:
 
@@ -126,7 +126,7 @@ docker run -ti -v $(pwd):/opt/data pdal/pdal pdal pipeline /opt/data/ept-remote.
 
 You can open the result in QGIS, set the CRS to EPSG:28355; and add an XYZ Tiles layer to render something like the following:
 
-![RPAS classification](../images/ept-dsm-qgis.jpg)
+![ACT Parliament House  DSM](../images/ept-dsm-qgis.jpg)
 
 Your own, on demand DSM from a clipped region via a web request!
 
