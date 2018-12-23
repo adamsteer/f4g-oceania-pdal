@@ -80,7 +80,7 @@ A key motivation for using entwine is it's lossless data storage. Let's test tha
 
 ```
 
-Then use a PDAL command line to test the results:
+Then use a (currently broken) PDAL command line to test the results:
 
 `pdal diff APPF-ground-smrf-allthepoints.laz back-from-entwine.laz`
 
