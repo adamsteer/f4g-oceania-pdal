@@ -28,7 +28,7 @@ Using Conda, create a new virtual environment like:
 
 `conda create -n f4g-pdal-workshop python=3.6 pdal numpy jupyter python-pdal pandas matplotlib -c conda-forge`
 
-This creates a virtual environment with PDAL and numpy installed, using the `conda-forge` channel. Head to a command line interface, switch to the exercises directory in this repository and type:
+This creates a virtual environment with PDAL and numpy (and more) installed, using the `conda-forge` channel. Head to a command line interface, switch to the exercises directory in this repository and type:
 
 `source activate f4g-pdal-workshop`
 
