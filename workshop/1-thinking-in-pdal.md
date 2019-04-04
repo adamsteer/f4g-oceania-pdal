@@ -28,19 +28,19 @@ A stage is the PDAL way of describing a processing step which operates on points
 
 ## Readers
 
-Readers are a stage which reads in data from a filesystem into a `pointview` - which can be operated on by `filters`. PDAL includes a range of 'built in' readers, and others can be added or removed as plugins as build time. You can also write your own.
+Readers are a stage which reads in data from a filesystem into a `pointview` - which can be operated on by `stages. PDAL includes a range of 'built in' readers, and others can be added or removed as plugins at build time. You can also write your own.
 
 Reference: https://pdal.io/stages/readers.html
 
 ## Filters
 
-Once you've read data into a `pointview`, filters are where the magic happens - they're methods for point data processing! YOu can stack filters together to form complex 'one liners' - with the `pointview` modified by one `filter` being passed to the next. The main caveat here is to be aware of how each filter modifies the view, in order to get the results you expect.
+Once you've read data into a `pointview`, filters are a stage where the magic happens - they're methods for point data processing! You can stack filters together to form complex 'one liners' - with the `pointview` modified by one `filter` being passed to the next or tagged to be reference by other stages. The main caveat here is to be aware of how each filter modifies the view, in order to get the results you expect.
 
 Reftererence: https://pdal.io/stages/filters.html
 
 ## Writers
 
-As the name suggests, writers are a stage which writes out a `pointview` to a file! As for readers, PDAL includes a range of 'built in' writers, and others can be added or removed as plugins as build time. You can also write your own.
+As the name suggests, writers are a stage which writes out a `pointview` to a file, db or whatelse! As for readers, PDAL includes a range of 'built in' writers, and others can be added or removed as plugins at build time. You can also write your own.
 
 Reference: https://pdal.io/stages/writers.html
 
