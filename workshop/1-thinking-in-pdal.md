@@ -40,7 +40,7 @@ Reftererence: https://pdal.io/stages/filters.html
 
 ## Writers
 
-As the name suggests, writers are a stage which writes out a `pointview` to a file, db or whatelse! As for readers, PDAL includes a range of 'built in' writers, and others can be added or removed as plugins at build time. You can also write your own.
+As the name suggests, writers are a stage which writes out a `pointview` to a file, database or whatever! As for readers, PDAL includes a range of 'built in' writers, and others can be added or removed as plugins at build time. You can also write your own.
 
 Reference: https://pdal.io/stages/writers.html
 
