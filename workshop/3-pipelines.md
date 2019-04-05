@@ -207,7 +207,7 @@ Many end uses of point cloud data are not points at all - but rasters or other d
 
 ![PDALDTM in QGIS](../images/QGIS-dtm-smrf.jpg)
 
-Note that PDAL does not handle DTM filling - that's left to tools which do the job better (for example GDAL).
+The `window_size` option in `writers.gdal` can be used to fill small holes - we haven't applied it here, but you could add this to your pipeline to remove small data gaps.
 
 Also note that we didn't quite remove all the tree points. Working from a ground-first approach may not be the best strategy here. Perhaps with RPAS data, we should identify all the other things (buildings, trees...) and call the leftover points either ground or noise (see, for example: https://smathermather.com/2018/12/07/classifying-point-clouds-with-cgal/)
 
