@@ -2,7 +2,7 @@
 
 Entwine is an application which reorganises data into [octree](https://en.wikipedia.org/wiki/Octree) structures, using the Entwine Point Tile (EPT) format. The emerging specification is shown here:
 
-https://github.com/connormanning/entwine/blob/master/doc/entwine-point-tile.md
+https://github.com/connormanning/entwine/blob/master/doc/source/entwine-point-tile.md
 
 EPT is intended to be a lossless 3D 'slippy map' tiling scheme for point clouds, which can be read into a viewer straight from storage (as for 2D map tiles).
 
