@@ -8,6 +8,8 @@ We'll dive straight in and use PDAL to run a query on a .LAS file we've obtained
 
 ![Dublin sample dataset](../images/dublin-sample.jpg)
 
+**Note** these are not *Height Above Ground* or normalised heights - Dublin is quite flat and close to sea level. We'll see that shortly. A customised colour scale is used to display the data, along with an eye dome lighting shader. The colour scale is available as [greens-trees.xml](../resources/greens-trees.xml)
+
 `pdal info T_316000_235500.laz`
 
 ...gives you a huge JSON spew of a bunch of file attributes, including summary statistics for each dimension in the file.
@@ -63,7 +65,7 @@ Reprojecting data is also a useful tool. This moves data from [TM65 Irish grid](
 
 ## Filtering points
 
-Points can be filtered many ways. We can restrict ranges point dimensions. If points carry labels (for example ASPRS classifications) we can use PDAL to exclude classes. We can also try to label 'noise' or points we don't think we need to pay attention to. Here, we'll limit elevations to anything between 0 and 10m above the reference surface:
+Points can be filtered many ways. We can restrict ranges point dimensions. If points carry labels (for example ASPRS classifications) we can use PDAL to exclude classes. We can also try to label 'noise' or points we don't think we need to pay attention to. Here, we'll limit elevations to anything between 0 and 10m above the reference surface, in this case sea level:
 
 `pdal translate filters.range -i T_316000_235500.laz -o outfile.laz --filters.range.limits="Z[0:10]"`
 
