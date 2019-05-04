@@ -105,7 +105,7 @@ We'll use this as a basis for an EPT data request, using the following pipeline:
   "pipeline": [
     {
       "type": "readers.ept",
-      "filename": "http://act2015-8ppm-rgb-ept.s3.amazonaws.com/",
+      "filename": "http://act-2015-rgb.s3.amazonaws.com",
       "bounds": "([692769, 693616], [6090200,6091233])"
     },
     {
