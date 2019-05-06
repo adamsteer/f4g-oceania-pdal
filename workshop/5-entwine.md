@@ -18,7 +18,7 @@ Both formats create many very small files - which is OK for object storage, less
 
 This is actually really easy using dockerised entwine. Taking our RPAS farm sample, try:
 
-`docker run -it -v $(pwd):/opt/data connormanning/entwine -i /opt/data/APPF-ground-smrf-allthepoints.laz -o /opt/data/appf-ground-sample`
+`docker run -it -v $(pwd):/opt/data connormanning/entwine build -i /opt/data/APPF-ground-smrf-allthepoints.laz -o /opt/data/appf-ground-sample`
 
 While that's running - entwine builds can also be configured with a simple JSON file, for example:
 
@@ -31,12 +31,12 @@ While that's running - entwine builds can also be configured with a simple JSON 
 
 ...saved as `web-mercator.json` and run as:
 
-`docker run -it -v $(pwd):/opt/data connormanning/entwine web-mercator.json -i /opt/data/APPF-ground-smrf-allthepoints.laz -o /opt/data/appf-ground-sample-webmercator`
+`docker run -it -v $(pwd):/opt/data connormanning/entwine build -c /opt/data/web-mercator.json -i /opt/data/APPF-ground-smrf-allthepoints.laz -o /opt/data/appf-ground-sample-webmercator`
 
 ...would run entwine using 6 threads, and reproject the index to web mercator (EPSG:3857).
 
 Entwine configuration details, with ongoing discussion, can be found here:
-https://github.com/connormanning/entwine/blob/master/doc/source/entwine-point-tile.md
+https://github.com/connormanning/entwine/blob/master/doc/source/configuration.md
 
 ## Inspecting an EPT resource
 
@@ -52,11 +52,11 @@ An EPT resource can be inspected on the filesystem where it is created. Navigate
 
 Once you've created an Entwine index, start a web server in the directory you're working in:
 
-`python -m ../resources/simplecorsserver.py 9001`
+`python /<path to>/f4g-oceania-pdal/resources/simplecorsserver.py 9001`
 
 ...and navigate to http://potree.entwine.io. Modify the URL to something like:
 
-http://potree.entwine.io/custom.html?r="http://localhost:9001/appf-ground-sample/"
+http://potree.entwine.io/data/view.html?r="http://localhost:9001/appf-ground-sample/"
 
 You should see something like this:
 
@@ -105,7 +105,7 @@ We'll use this as a basis for an EPT data request, using the following pipeline:
   "pipeline": [
     {
       "type": "readers.ept",
-      "filename": "http://act2015-8ppm-rgb-ept.s3.amazonaws.com/",
+      "filename": "http://act-2015-rgb.s3.amazonaws.com",
       "bounds": "([692769, 693616], [6090200,6091233])"
     },
     {
