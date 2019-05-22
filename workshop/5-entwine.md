@@ -56,7 +56,7 @@ Once you've created an Entwine index, start a web server in the directory you're
 
 ...and navigate to http://potree.entwine.io. Modify the URL to something like:
 
-http://potree.entwine.io/data/view.html?r="http://localhost:9001/appf-ground-sample/"
+http://potree.entwine.io/data/custom.html?r="http://localhost:9001/appf-ground-sample/"
 
 You should see something like this:
 
