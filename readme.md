@@ -22,13 +22,15 @@ Text relating to the workshop is contained in [workshop](./workshop). Jupyter no
 
 ## Preparation
 
-This workshop requires a PDAL installation with python bindings. Using Conda is convenient, but a native installation should work just fine as well. However PDAL is installed, it needs to be visible to a Jupyter notebook.
+This workshop requires a PDAL installation with python bindings. Using the minified [Conda package manager](https://docs.conda.io/en/latest/miniconda.html) is convenient and works across Linux, MacOS and Windows. A native installation should work just fine as well. However PDAL is installed, it needs to be at least release 2.1, and be visible to a Jupyter notebook.
 
 Using Conda, create a new virtual environment like:
 
-`conda create -n f4g-pdal-workshop python pdal python-pdal entwine jq numpy jupyter pandas matplotlib -c conda-forge`
+`conda create -n f4g-pdal-workshop python pdal python-pdal entwine jq numpy pandas matplotlib jupyter -c conda-forge`
 
-This creates a virtual environment with PDAL, PDAL Python bindings, Entwine and numpy (and more) installed, using the `conda-forge` channel. Head to a command line interface, switch to the exercises directory in this repository and type:
+This creates a virtual environment with PDAL, PDAL Python bindings, and Entwine installed, using the `conda-forge` channel. It also installs the `jq` command line utility, for parsing PDAL's metadata responses. Numpy, Pandas, Matplotlib and Jupyter are all Python packages for data manipulation and visualisation.
+
+To use the new environment head to a command line interface, switch to the exercises directory in this repository and type:
 
 `conda activate f4g-pdal-workshop`
 
@@ -52,15 +54,15 @@ To visualise some data products, please ensure you have:
 
 ### Sample data
 
-For command line processing and demonstrating PDAL in Python we'll use:
+For command line processing and demonstrating PDAL in Python we'll use airborne lidar data:
 https://s3.amazonaws.com/f4g-pdal-workshop-sampledata/T_316000_235500.laz
 
 This data sample comes from the New York University LiDAR survey of Dublin, Ireland: https://geo.nyu.edu/catalog/nyu-2451-38684
 
-For PDAL pipelines and Entwine we'll use:
+For PDAL pipelines and Entwine we'll work on drone data, processed into a point cloud using structure-from-motion techniques:
 https://s3.amazonaws.com/f4g-pdal-workshop-sampledata/APPF-farm-sample.laz
 
-This data sample is a photogrammetric point cloud collected by the Australian Plant Phenomics Facility (http://appf.edu.au).
+This data sample was collected by the Australian Plant Phenomics Facility (http://appf.edu.au).
 
 Please download these ahead of the workshop.
 
@@ -68,4 +70,4 @@ Please download these ahead of the workshop.
 
 Feel free to explore and use the workshop materials as you see fit, acknowledgment is appreciated. All data samples used in this workshop are licensed CCBY4 and available in public repositories.
 
-I'd also be very happy to run this workshop (or similar ones) for your organisation - please contact me for details.
+I'd also be very happy to run this workshop and customised variations of it for your organisation - please contact me for details and pricing.
