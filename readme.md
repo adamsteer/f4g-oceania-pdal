@@ -3,7 +3,7 @@
 ### A workshop designed for [FOSS4G SotM Oceania 2018](http://fossf4g-oceania.org)
 
 **Dr. Adam Steer**  
-http://spatialised.net  
+https://spatialised.net  
 @adamdsteer  
 adam@spatialised.net
 
@@ -14,7 +14,7 @@ This repository contains materials for a point cloud processing workshop develop
 It uses the [Point Data Abstraction Library](http://pdal.io) (PDAL), [Entwine](http://entwine.io) Python, Numpy, Jupyter notebooks, and the [Potree point cloud visualiser](http://potree.org) to develop some concepts about processing point clouds and visualising results.
 
 ![PDAL logo](https://pdal.io/_images/pdal_logo.png)  
-![Entwine logo](https://entwine.io/_images/entwine_logo_2-color-small.png)
+![Entwine logo](https://github.com/connormanning/entwine/blob/master/doc/logo/color/entwine_logo_2-color-small.png)
 
 ## Materials
 
@@ -26,11 +26,11 @@ This workshop requires a PDAL installation with python bindings. Using Conda is 
 
 Using Conda, create a new virtual environment like:
 
-`conda create -n f4g-pdal-workshop python=3.6 pdal numpy jupyter python-pdal pandas matplotlib -c conda-forge`
+`conda create -n f4g-pdal-workshop python pdal python-pdal entwine jq numpy jupyter pandas matplotlib -c conda-forge`
 
-This creates a virtual environment with PDAL and numpy (and more) installed, using the `conda-forge` channel. Head to a command line interface, switch to the exercises directory in this repository and type:
+This creates a virtual environment with PDAL, PDAL Python bindings, Entwine and numpy (and more) installed, using the `conda-forge` channel. Head to a command line interface, switch to the exercises directory in this repository and type:
 
-`source activate f4g-pdal-workshop`
+`conda activate f4g-pdal-workshop`
 
 ..and then:
 
@@ -38,15 +38,11 @@ This creates a virtual environment with PDAL and numpy (and more) installed, usi
 
 ...to get access to the processing notebooks.
 
-You'll still need to run entwine via docker, so:
+PDAL uses a modular filter system, and some things we want to use are not included in Conda builds. We can also use dockerised PDAL, which you can get via:
 
-`docker pull connormanning/entwine`
+`docker pull pdal/pdal`
 
-If you don't want to use Jupyter, no drama - most processes can be done at the command line using dockerised PDAL, which you can get via:
-
-`docker pull pdal/pdal:1.8`
-
-...but stick with us - instructions for dockerised processing are included in the notebook!
+Instructions for dockerised processing are included in the notebooks.
 
 To visualise some data products, please ensure you have:
 - [QGIS](http://qgis.org) or an alternate viewer for geoJSON and georeferenced raster data
