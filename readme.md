@@ -3,7 +3,7 @@
 ### A workshop designed for [FOSS4G SotM Oceania 2018](http://fossf4g-oceania.org)
 
 **Dr. Adam Steer**  
-http://spatialised.net  
+https://spatialised.net  
 @adamdsteer  
 adam@spatialised.net
 
@@ -14,7 +14,7 @@ This repository contains materials for a point cloud processing workshop develop
 It uses the [Point Data Abstraction Library](http://pdal.io) (PDAL), [Entwine](http://entwine.io) Python, Numpy, Jupyter notebooks, and the [Potree point cloud visualiser](http://potree.org) to develop some concepts about processing point clouds and visualising results.
 
 ![PDAL logo](https://pdal.io/_images/pdal_logo.png)  
-![Entwine logo](https://entwine.io/_images/entwine_logo_2-color-small.png)
+![Entwine logo](https://github.com/connormanning/entwine/blob/master/doc/logo/color/entwine_logo_2-color-small.png)
 
 ## Materials
 
@@ -22,15 +22,17 @@ Text relating to the workshop is contained in [workshop](./workshop). Jupyter no
 
 ## Preparation
 
-This workshop requires a PDAL installation with python bindings. Using Conda is convenient, but a native installation should work just fine as well. However PDAL is installed, it needs to be visible to a Jupyter notebook.
+This workshop requires a PDAL installation with python bindings. Using the minified [Conda package manager](https://docs.conda.io/en/latest/miniconda.html) is convenient and works across Linux, MacOS and Windows. A native installation should work just fine as well. However PDAL is installed, it needs to be at least release 2.1, and be visible to a Jupyter notebook.
 
 Using Conda, create a new virtual environment like:
 
-`conda create -n f4g-pdal-workshop python=3.6 pdal numpy jupyter python-pdal pandas matplotlib -c conda-forge`
+`conda create -n f4g-pdal-workshop python pdal python-pdal entwine jq numpy pandas matplotlib jupyter -c conda-forge`
 
-This creates a virtual environment with PDAL and numpy (and more) installed, using the `conda-forge` channel. Head to a command line interface, switch to the exercises directory in this repository and type:
+This creates a virtual environment with PDAL, PDAL Python bindings, and Entwine installed, using the `conda-forge` channel. It also installs the `jq` command line utility, for parsing PDAL's metadata responses. Numpy, Pandas, Matplotlib and Jupyter are all Python packages for data manipulation and visualisation.
 
-`source activate f4g-pdal-workshop`
+To use the new environment head to a command line interface, switch to the exercises directory in this repository and type:
+
+`conda activate f4g-pdal-workshop`
 
 ..and then:
 
@@ -38,15 +40,11 @@ This creates a virtual environment with PDAL and numpy (and more) installed, usi
 
 ...to get access to the processing notebooks.
 
-You'll still need to run entwine via docker, so:
+PDAL uses a modular filter system, and some things we want to use are not included in Conda builds. We can also use dockerised PDAL, which you can get via:
 
-`docker pull connormanning/entwine`
+`docker pull pdal/pdal`
 
-If you don't want to use Jupyter, no drama - most processes can be done at the command line using dockerised PDAL, which you can get via:
-
-`docker pull pdal/pdal:1.8`
-
-...but stick with us - instructions for dockerised processing are included in the notebook!
+Instructions for dockerised processing are included in the notebooks.
 
 To visualise some data products, please ensure you have:
 - [QGIS](http://qgis.org) or an alternate viewer for geoJSON and georeferenced raster data
@@ -56,15 +54,15 @@ To visualise some data products, please ensure you have:
 
 ### Sample data
 
-For command line processing and demonstrating PDAL in Python we'll use:
+For command line processing and demonstrating PDAL in Python we'll use airborne lidar data:
 https://s3.amazonaws.com/f4g-pdal-workshop-sampledata/T_316000_235500.laz
 
 This data sample comes from the New York University LiDAR survey of Dublin, Ireland: https://geo.nyu.edu/catalog/nyu-2451-38684
 
-For PDAL pipelines and Entwine we'll use:
+For PDAL pipelines and Entwine we'll work on drone data, processed into a point cloud using structure-from-motion techniques:
 https://s3.amazonaws.com/f4g-pdal-workshop-sampledata/APPF-farm-sample.laz
 
-This data sample is a photogrammetric point cloud collected by the Australian Plant Phenomics Facility (http://appf.edu.au).
+This data sample was collected by the Australian Plant Phenomics Facility (http://appf.edu.au).
 
 Please download these ahead of the workshop.
 
@@ -72,4 +70,4 @@ Please download these ahead of the workshop.
 
 Feel free to explore and use the workshop materials as you see fit, acknowledgment is appreciated. All data samples used in this workshop are licensed CCBY4 and available in public repositories.
 
-I'd also be very happy to run this workshop (or similar ones) for your organisation - please contact me for details.
+I'd also be very happy to run this workshop and customised variations of it for your organisation - please contact me for details and pricing.

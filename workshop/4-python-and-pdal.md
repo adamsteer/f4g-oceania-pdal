@@ -9,8 +9,7 @@ In order to make it go, PDAL needs to be compiled with Python bindings. Fortunat
 Python functions can be run as part of a `pipeline` using `filters.python`. This is handy for customised processing - for example reducing colour bitness, or inverting a dimension. Here's an example pipeline calling a Python function to invert the Z Dimension for a multibeam SONAR dataset. To keep you on your toes, I've introduced a new `readers.text` here - and show a way to go from XYZ to LAZ (or any PDAL writable format)
 
 ```
-{
-  "pipeline":[
+[
   {
       "type" : "readers.text",
       "filename" : "inputfile.txt",
@@ -30,7 +29,6 @@ Python functions can be run as part of a `pipeline` using `filters.python`. This
       "compression":"laszip"
     }
   ]
-}
 ```
 
 The python function looks like this:
@@ -51,13 +49,13 @@ This is best demonstrated in a Jupyter notebook. Head to the command line prompt
 
 Start your virtual environment:
 
-`source activate f4g-pdal-workshop`
+`conda activate f4g-pdal-workshop`
 
 ..and start Jupyter:
 
 `jupyter notebook`
 
-...which should give you access to [the notebook](../notebooks/PDAL-python.ipynb). It's a fully worked example of classifying ground in a subset of the Dublin LiDAR dataset, and introduces a sorting filter for space filling curves: `filters.mortonorder`. We'll step through  the notebook, and feel free to experiment with it!
+...which should give you access to [the notebook](../notebooks/PDAL-python.ipynb). It's a fully worked example of classifying ground in a subset of the Dublin lidar dataset, and introduces a sorting filter for space filling curves: `filters.mortonorder`. We'll step through  the notebook, and feel free to experiment with it!
 
 ## Summary
 

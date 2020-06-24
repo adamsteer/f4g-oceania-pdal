@@ -22,13 +22,15 @@ In PDAL, `dimensions` are the set of things described in the point cloud data sc
 
 The list of standard PDAL dimensions is here: https://pdal.io/dimensions.html - again, many of these are derived from ASPRS LAS formats. Primarily because it's a data exchange format we can't ignore, and second - it's a standard, and while never perfect, standards make implementation easier.
 
+PDAL handles customised dimensions in modern LAS formats with ease. We'll come to some of those in the workshop - and how to deal with them.
+
 ## Stages
 
 A stage is the PDAL way of describing a processing step which operates on points. That's it!
 
 ## Readers
 
-Readers are a stage which reads in data from a filesystem into a `pointview` - which can be operated on by `stages. PDAL includes a range of 'built in' readers, and others can be added or removed as plugins at build time. You can also write your own.
+Readers are a stage which reads in data from a filesystem into a `pointview` - which can be operated on by `stages`. PDAL includes a range of 'built in' readers, and others can be added or removed as plugins at build time. You can also write your own.
 
 Reference: https://pdal.io/stages/readers.html
 

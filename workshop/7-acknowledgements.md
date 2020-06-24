@@ -14,3 +14,7 @@ Also:
 And with help from:
 - Claire Trenham
 - team [Synthesis Technologies](http://synth.earth)
+
+Many corrections to this workshop were made by:
+- Luigi Pirelli [github profile](https://github.com/luipir)
+- Keith Moss [github profile](https://github.com/keithamoss)
