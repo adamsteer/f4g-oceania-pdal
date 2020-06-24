@@ -12,6 +12,11 @@ We'll dive straight in and use PDAL to run a query on a .LAS file we've obtained
 
 `pdal info T_316000_235500.laz`
 
+---
+Docker:
+
+`docker run -it -v $(pwd):/data pdal/pdal info /data/T_316000_235500.laz`
+---
 ...gives you a huge JSON spew of a bunch of file attributes, including summary statistics for each dimension in the file.
 
 Let's look at some different metadata queries. What can you see from:

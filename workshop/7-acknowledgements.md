@@ -13,7 +13,7 @@ Also:
 
 And with help from:
 - Claire Trenham
-- team [Synthesis Technologies](http://synth.earth)
+- team [Synthesis Technologies](http://synth.earth), who I was working for when I wrote the first iteration of this workshop
 
 Many corrections to this workshop were made by:
 - Luigi Pirelli [github profile](https://github.com/luipir)

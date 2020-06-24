@@ -28,6 +28,9 @@ We can also cast these workflows into JSON configuration snippets, and run them 
 
 `pdal pipeline reprojection.json`
 
+    [using docker]
+    docker run -it -v $(pwd):/opt/data/ pdal/pdal pipeline /opt/data/reprojection.json
+
 Just to remind ourselves, the command line equivalent is:
 
 ```
@@ -87,17 +90,17 @@ It has no classification labels! Let's try to fix that. Create a file 'rpas-grou
 
 ...but wait! there's a whole lot of new there. We've stacked a whole lot of filters together. Here we see the convenience of the pipeline approach. Starting from the top, we are:
 
-- using `filters.assign` to label all points as unclassified
-- applying `filters.elm` (extended local minimum) to label 'low points' as noise (ASPRS LAS class 7)
-- then applying `filters.outlier`, using a statisical approach label remaining outlying points as noise (ASPRS LAS class 7)
-- next, using `filters.csf` (Cloth Simulation Filter) to label points as 'ground', ignoring any points already labelled as 'noise'
+- using `filters.assign` to label all points as unclassified ([documentation](https://pdal.io/stages/filters.assign.html))
+- applying `filters.elm` (extended local minimum) to label 'low points' as noise (ASPRS LAS class 7) ([documentation](https://pdal.io/stages/filters.elm.html))
+- then applying `filters.outlier`, using a statisical approach label remaining outlying points as noise (ASPRS LAS class 7)([documentation](https://pdal.io/stages/filters.outlier.html))
+- next, using `filters.csf` (Cloth Simulation Filter) to label points as 'ground', ignoring any points already labelled as 'noise' ([documentation](https://pdal.io/stages/filters.csf.html))
 - ...then finally, removing any points *not* labelled as ground from the output and writing them out to `APPF-ground-default.laz`
 
 Once you've got an output file, if you have CloudCompare (or another LAS/LAZ viewer), open `APPF-ground-default.laz` and check the results:
 
 ![Farm sample](../images/appf-ground-default.jpg)
 
-You'll see here only points labelled as 'ground' are returned - we've dropped any noise and unclassified points using a range filter. It's also not the best segmentation of 'ground' points - a stand of trees has been mislabelled!
+You'll see here only points labelled as `ground` are returned - we've dropped any noise and unclassified points using a range filter. It's also not the best segmentation of `ground` points - a stand of trees has been mislabelled!
 
 We've also leaped right into the deep end with a long chain of processing. The point here is showing how it's actually pretty easy - once you know what it is you need to do. We've used a `reader`, a bunch of `filters` chained together to operate on a `pointview`, and exported the result using a `writer`
 
@@ -147,8 +150,6 @@ pdal pipeline rpas-ground-allthepoints.json --filters.smrf.slope=0.1 --filters.s
 Visualising the ground points from this process, we see that we've managed to remove the unwanted treetops:
 
 ![RPAS classification](../images/appf-ground-modparams.jpg)
-
-
 
 In short, any option from the stages used in the pipeline can be over-ridden by passing equivalent command line options. How might you write out a different filename, for example?
 
@@ -202,7 +203,7 @@ Also note that we didn't quite remove all the tree points. Working from a ground
 
 ## Extra notes on finding ground
 
-This workshop originally used the Simple Morphological Filter to label ground points, and found that for `filters.smrf` our ground is flatter than the default option (`slope=0.1`), our non-ground items might be wider than the default expectation (`window=30`), and our noise level might be a little higher (`threshold=0.4`). Try building a pipeline which will run with these options:
+This workshop originally used the [Simple Morphological Filter](https://pdal.io/stages/filters.smrf.html) to label ground points, and found that for `filters.smrf` our ground is flatter than the default option (`slope=0.1`), our non-ground items might be wider than the default expectation (`window=30`), and our noise level might be a little higher (`threshold=0.4`). Try building a pipeline which will run with these options:
 
 ```
 pdal pipeline rpas-ground-smrf.json --filters.smrf.slope=0.1 --filters.smrf.window=30 --filters.smrf.threshold=0.4
