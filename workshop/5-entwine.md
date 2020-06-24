@@ -16,7 +16,11 @@ Both formats create many very small files - which is OK for object storage, less
 
 ## Creating an EPT resource
 
-This is actually really easy using dockerised entwine. Taking our RPAS farm sample, try:
+This is actually really easy using conda-installed entwine. Taking our RPAS farm sample, try:
+
+`entwine build -i APPF-ground-smrf-allthepoints.laz -o appf-ground-sample`
+
+To run this in docker, use:
 
 `docker run -it -v $(pwd):/opt/data connormanning/entwine build -i /opt/data/APPF-ground-smrf-allthepoints.laz -o /opt/data/appf-ground-sample`
 
@@ -31,7 +35,7 @@ While that's running - entwine builds can also be configured with a simple JSON 
 
 ...saved as `web-mercator.json` and run as:
 
-`docker run -it -v $(pwd):/opt/data connormanning/entwine build -c /opt/data/web-mercator.json -i /opt/data/APPF-ground-smrf-allthepoints.laz -o /opt/data/appf-ground-sample-webmercator`
+`entwine build -c web-mercator.json -i APPF-ground-smrf-allthepoints.laz -o appf-ground-sample-webmercator`
 
 ...would run entwine using 6 threads, and reproject the index to web mercator (EPSG:3857).
 
@@ -52,7 +56,7 @@ An EPT resource can be inspected on the filesystem where it is created. Navigate
 
 Once you've created an Entwine index, start a web server in the directory you're working in:
 
-`python /<path to>/f4g-oceania-pdal/resources/simplecorsserver.py 9001`
+`python /full/path/to/resources/simplecorsserver.py 9001`
 
 ...and navigate to http://potree.entwine.io. Modify the URL to something like:
 
@@ -64,32 +68,26 @@ You should see something like this:
 
 ## reading an Entwine index with PDAL
 
-*Note: this requires PDAL 1.8 with* `readers.ept`
+*Note: this requires PDAL built with* `readers.ept`
 
 A key motivation for using entwine is it's lossless data storage. Let's test that, and PDAL's entwine reader at the same time. So let's set up a pipeline to read our new local EPT resource and write out a LAZ file from the complete dataset:
 
 ```
-{
-  "pipeline": [
+[
     {
       "type": "readers.ept",
       "filename": "ept://opt/data/appf-ground-sample"
     },
     "/opt/data/back-from-entwine.laz"
-  ]
-}
+]
 
 ```
 
-Then use a (currently broken) PDAL command line to test the results:
 
-`pdal diff APPF-ground-smrf-allthepoints.laz back-from-entwine.laz`
-
-Did we make it? `pdal diff` is being fixed as of writing this - try loading the two datasets in CloudCompare and running a cloud to cloud comparison.
 
 ## Scaling it upward
 
-*Note: this requires PDAL 1.8 with* `readers.ept`
+*Note: this requires PDAL built with* `readers.ept`
 
 This workshop promised billions of points. So let's try that out using the ACT Government's 2015 LiDAR survey. It covers 1600 sqaure kilometres, and in total contains 30 billion points.
 
@@ -101,8 +99,7 @@ Point a web browser at: http://potree.entwine.io/data/au-act-2015.html
 
 We'll use this as a basis for an EPT data request, using the following pipeline:
 ```
-{
-  "pipeline": [
+[
     {
       "type": "readers.ept",
       "filename": "http://act-2015-rgb.s3.amazonaws.com",
@@ -114,16 +111,18 @@ We'll use this as a basis for an EPT data request, using the following pipeline:
         "output_type":"idw",
         "filename":"/opt/data/act-dsm.tiff"
     }
-  ]
-}
+]
 ```
 
-Run this using docker:
+Run this like:
 
+`pdal pipeline ept-remote.json`
+
+
+..or in docker:
 ```
 docker run -ti -v $(pwd):/opt/data pdal/pdal pdal pipeline /opt/data/ept-remote.json
 ```
-
 
 You can open the result in QGIS, set the CRS to EPSG:28355; and add an XYZ Tiles layer to render something like the following:
 
@@ -133,6 +132,6 @@ Your own, on demand DSM from a clipped region via a web request!
 
 # Summary
 
-Entwine and Entwine Point Tiles are a powerful tool for organising point data for visualisation and exploitation using the PDAL toolbox. While there are overheads in processing, this system represents a hge leap in how we can think about managing massive point cloud datasets as fundamental infrastructure.
+Entwine and Entwine Point Tiles are a powerful tool for organising point data for visualisation and exploitation using the PDAL toolbox. While there are overheads in processing, this system represents a huge leap in how we can think about managing massive point cloud datasets as fundamental infrastructure.
 
 [next - wrapping up](6-wrapup.md)
