@@ -70,25 +70,6 @@ You should see something like this:
 
 *Note: this requires PDAL built with* `readers.ept`
 
-A key motivation for using entwine is it's lossless data storage. Let's test that, and PDAL's entwine reader at the same time. So let's set up a pipeline to read our new local EPT resource and write out a LAZ file from the complete dataset:
-
-```
-[
-    {
-      "type": "readers.ept",
-      "filename": "ept://opt/data/appf-ground-sample"
-    },
-    "/opt/data/back-from-entwine.laz"
-]
-
-```
-
-
-
-## Scaling it upward
-
-*Note: this requires PDAL built with* `readers.ept`
-
 This workshop promised billions of points. So let's try that out using the ACT Government's 2015 LiDAR survey. It covers 1600 sqaure kilometres, and in total contains 30 billion points.
 
 Point a web browser at: http://potree.entwine.io/data/au-act-2015.html

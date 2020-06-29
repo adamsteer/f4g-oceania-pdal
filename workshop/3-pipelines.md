@@ -14,8 +14,8 @@ We can also cast these workflows into JSON configuration snippets, and run them 
     },
     {
         "type":"filters.reprojection",
-        "in_srs":"EPSG:32756",
-        "out_srs":"EPSG:28356"
+        "in_srs":"EPSG:32755",
+        "out_srs":"EPSG:28355"
     },
     {
         "type":"writers.las",
@@ -39,6 +39,12 @@ pdal translate inputfile.las outputfile.laz --filters.reprojection.in_srs="EPSG:
 
 However - instead of using increasingly long command line processes, the `pipeline` application allows creation of a library of standard processing tasks as easily-readable JSON files.
 
+Adding a verbosity flag to the command lets us gain some insight into how the process is going. I'd usually run pipelines like:
+
+`pdal pipeline reprojection.json -v 8`
+
+...where `-v 8` says 'set verbosity to the highest possible level - tell me lots about what is happening'.
+
 ## Diving right in - labelling ground points
 
 Classifying ground points is a fundamental task for point cloud processing. lidar data can often exploit 'last returns' for ground classification - and usually any lidar you come across in public repositories already has ground points labelled (it's often a requirement in acquisition contracts).
@@ -49,11 +55,13 @@ We'll demonstrate ground labelling for RPAS data using the sample `APPF-farm-sam
 
 ![Farm sample](../images/appf-sample.jpg)
 
-...and coloured by classification:
+It has no classification labels - which we can test by running a metadata query:
 
-![Farm sample](../images/appf-sample-classes.jpg)
+```
+pdal info APPF-farm-sample.laz --filters.stats.dimensions="Classification"  --filters.stats.count="Classification"
+```
 
-It has no classification labels! Let's try to fix that. Create a file 'rpas-ground.json' and populate it with:
+Let's try to fix that. Create a file 'rpas-ground.json' and populate it with:
 ```
 [
     {
@@ -98,19 +106,19 @@ It has no classification labels! Let's try to fix that. Create a file 'rpas-grou
 
 Once you've got an output file, if you have CloudCompare (or another LAS/LAZ viewer), open `APPF-ground-default.laz` and check the results:
 
-![Farm sample](../images/appf-ground-default.jpg)
+![Farm sample](../images/appf-ground-default-csf.png)
 
 You'll see here only points labelled as `ground` are returned - we've dropped any noise and unclassified points using a range filter. It's also not the best segmentation of `ground` points - a stand of trees has been mislabelled!
 
 We've also leaped right into the deep end with a long chain of processing. The point here is showing how it's actually pretty easy - once you know what it is you need to do. We've used a `reader`, a bunch of `filters` chained together to operate on a `pointview`, and exported the result using a `writer`
 
-Try pulling apart the pipeline and running parts of it, or removing some of the filters and see what happens by viewing results in CloudCompare. If you haven't already done so, that's the next step
+Try pulling apart the pipeline and running parts of it, or removing some of the filters and see what happens by viewing results in CloudCompare.
 
 ## Overriding options, and making better ground
 
-An easy assumption using pipelines is that everything is fixed to the parameters given in the JSON configuration. That's a little painful, especially if you have a thousand tiles to process!
+An easy assumption to make using pipelines is that everything is fixed to the parameters given in the JSON configuration.
 
-We can fix that - using either command line overrides, or for clever folks, templating in JSON (we'll get to that shortly using Python).
+We can fix that using either command line overrides in a shell. In Python, we can use variables - and make our pipelines quite dynamic.
 
 Let's modify our pipeline a little to remove the final filter, and write out the entire dataset with noise and ground points labelled. We will then pass in some non-default `filters.csf` options. Write the next JSON block out as `rpas-ground-allthepoints.json`
 
@@ -125,7 +133,7 @@ Let's modify our pipeline a little to remove the final filter, and write out the
         "assignment":"Classification[:]=0"
     },
     {
-        "type":"filters.elm",
+        "type":"filters.elm"
     },
     {
         "type":"filters.outlier"
@@ -141,19 +149,17 @@ Let's modify our pipeline a little to remove the final filter, and write out the
 ]
 ```
 
-Now, invoke PDAL with some custom options to `filters.csf`. The set used here were obtained by trial-and-error - experiment and see what changes you get:
+Now, invoke PDAL with some custom options to `filters.csf`. The Cloth Simulation Filter defaults generally do a great job for this type of data, however - your particular dataset may need something special. Here's an example of over-riding filter defaults,and also how to write to a different file name:
 
 ```
-pdal pipeline rpas-ground-allthepoints.json --filters.smrf.slope=0.1 --filters.smrf.window=30 --filters.smrf.threshold=0.4
+pdal pipeline rpas-ground-allthepoints.json --filters.csf.rigidness=5 --filters.csf.resolution=5 --writers.las.filename=APPF-csf-modparams.laz
 ```
 
-Visualising the ground points from this process, we see that we've managed to remove the unwanted treetops:
+Visualising the ground points from this process, we see that
 
-![RPAS classification](../images/appf-ground-modparams.jpg)
+![RPAS classification](../images/appf-ground-csf-modparams.jpg)
 
-In short, any option from the stages used in the pipeline can be over-ridden by passing equivalent command line options. How might you write out a different filename, for example?
-
-(hint - look at options for `writers.las`)
+In short, any option from the stages used in the pipeline can be over-ridden by passing equivalent command line options.
 
 When designing pipelines, try to optimise them such that options which *need* to change often are as few as possible.
 
@@ -201,9 +207,9 @@ The `window_size` option in `writers.gdal` can be used to fill small holes - we 
 
 Also note that we didn't quite remove all the tree points. Working from a ground-first approach may not be the best strategy here. Perhaps with RPAS data, we should identify all the other things (buildings, trees...) and call the leftover points either ground or noise (see, for example: https://smathermather.com/2018/12/07/classifying-point-clouds-with-cgal/)
 
-## Extra notes on finding ground
+## Other ways of labelling 'ground'
 
-This workshop originally used the [Simple Morphological Filter](https://pdal.io/stages/filters.smrf.html) to label ground points, and found that for `filters.smrf` our ground is flatter than the default option (`slope=0.1`), our non-ground items might be wider than the default expectation (`window=30`), and our noise level might be a little higher (`threshold=0.4`). Try building a pipeline which will run with these options:
+This exercise originally used the [Simple Morphological Filter](https://pdal.io/stages/filters.smrf.html) to label ground points, and found that for `filters.smrf` our ground is flatter than the default option (`slope=0.1`), our non-ground items might be wider than the default expectation (`window=30`), and our noise level might be a little higher (`threshold=0.4`). Try building a pipeline which will run with these options:
 
 ```
 pdal pipeline rpas-ground-smrf.json --filters.smrf.slope=0.1 --filters.smrf.window=30 --filters.smrf.threshold=0.4

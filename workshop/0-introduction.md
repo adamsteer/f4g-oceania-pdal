@@ -28,9 +28,13 @@ All of our exercises today are run from there.
 
 ## Questions and feedback
 
-Feel free to ask questions anytime. Be aware you may be asked to wait for an answer if it is coming later in the session! If you are nervous about asking questions or drawing attention to yourself in the group, please place a single sticky note somewhere a helper will notice it on your laptop as we wander around.
+Feel free to ask questions anytime. Be aware you may be asked to wait for an answer if it is coming later in the session! If you are nervous about asking questions or drawing attention to yourself in the group, please place a single sticky note somewhere a helper will notice it on your laptop as we wander around. Or, for online delivery, please feel free to send private chat queries to the facilitator.
 
-Please give feedback! We'll use software carpentry style 1 up, 1 down anonymous feedback on sticky notes. At break time stick them to the wall, and I'll read them. If anything can be improved for the second session, we'll try to do it. A feedback session will be held at the end. Don't be shy here - the longer you wait to provide input the harder your task will be!
+Please give feedback! In person we'll use software carpentry style 1 up, 1 down anonymous feedback on sticky notes. At break time stick them to the wall, and I'll read them. If anything can be improved for the second session, we'll try to do it.
+
+For online delivery, anonymous feedback will be ...
+
+A feedback session will be held at the end. Don't be shy here - the longer you wait to provide input the harder your task will be!
 
 ## Running order
 

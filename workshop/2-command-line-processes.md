@@ -12,20 +12,19 @@ We'll dive straight in and use PDAL to run a query on a .LAS file we've obtained
 
 `pdal info T_316000_235500.laz`
 
----
-Docker:
+    [in docker]:
+    docker run -it -v $(pwd):/data pdal/pdal info /data/T_316000_235500.laz
 
-`docker run -it -v $(pwd):/data pdal/pdal info /data/T_316000_235500.laz`
----
 ...gives you a huge JSON spew of a bunch of file attributes, including summary statistics for each dimension in the file.
 
 Let's look at some different metadata queries. What can you see from:
 
-`pdal info T_316000_235500.laz --stats`  
-`pdal info T_316000_235500.laz --metadata`  
-`pdal info T_316000_235500.laz --summary`  
-`pdal info T_316000_235500.laz --boundary`  
-
+```
+pdal info T_316000_235500.laz --stats
+pdal info T_316000_235500.laz --metadata  
+pdal info T_316000_235500.laz --summary  
+pdal info T_316000_235500.laz --boundary  
+```
 ## Searching for points
 
 We can look for information about points. Try:
@@ -51,6 +50,9 @@ More useful is finding points by geographic location. the `query` option to `inf
 PDAL can do straightforward data translation as a one liner using the [translate](https://pdal.io/apps/translate.html) convenience application . We'll inspect some use cases here. The basic pattern
 
 `pdal translate infile outfile --operation(s)`
+
+    [in docker]:
+    docker run -it -v $(pwd):/opt/data pdal/pdal translate /opt/data/infile.laz /opt/data/outfile.laz
 
 To compress a file to LAZ format, try:
 

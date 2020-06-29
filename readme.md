@@ -1,7 +1,5 @@
 # Processing and visualising point clouds with the PDAL/Entwine/Potree stack
 
-### A workshop designed for [FOSS4G SotM Oceania 2018](http://fossf4g-oceania.org)
-
 **Dr. Adam Steer**  
 https://spatialised.net  
 @adamdsteer  
@@ -16,6 +14,12 @@ It uses the [Point Data Abstraction Library](http://pdal.io) (PDAL), [Entwine](h
 ![PDAL logo](https://pdal.io/_images/pdal_logo.png)  
 ![Entwine logo](https://github.com/connormanning/entwine/blob/master/doc/logo/color/entwine_logo_2-color-small.png)
 
+## What this workshop will deliver
+
+This workshop uses common point cloud data analysis tasks to demonstrate 'thinking in PDAL'. Using both lidar and photogrammetric data, users are shown how to apply a range of simple strategies to construct complex workflows. These are demonstrated using a command line interface, then using configuration files to hold common parameters, then using Python for running processes and exploratory visualisation. The workshop also shows how to run tasks using PDAL in a docker container.
+
+At the end of the workshop users should have a greater understanding of how PDAL's pipeline architecture works, and some ideas about how to apply it in their own data analysis tasks.
+
 ## Materials
 
 Text relating to the workshop is contained in [workshop](./workshop). Jupyter notebooks used in the workshop are contained in [notebooks](./notebooks). Sample workflows as PDAL pipelines are contained in [resources](./resources).
@@ -26,7 +30,7 @@ This workshop requires a PDAL installation with python bindings. Using the minif
 
 Using Conda, create a new virtual environment like:
 
-`conda create -n f4g-pdal-workshop python pdal python-pdal entwine jq numpy pandas matplotlib jupyter -c conda-forge`
+`conda create -n f4g-pdal-workshop python pdal python-pdal entwine jq numpy pandas matplotlib jupyter scipy seaborn -c conda-forge`
 
 This creates a virtual environment with PDAL, PDAL Python bindings, and Entwine installed, using the `conda-forge` channel. It also installs the `jq` command line utility, for parsing PDAL's metadata responses. Numpy, Pandas, Matplotlib and Jupyter are all Python packages for data manipulation and visualisation.
 
