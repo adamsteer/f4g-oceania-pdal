@@ -65,29 +65,27 @@ Let's try to fix that. Create a file 'rpas-ground.json' and populate it with:
 ```
 [
     {
-      "type":"readers.las",
-      "filename":"APPF-farm-sample.laz"
+      "type": "readers.las",
+      "filename": "APPF-farm-sample.laz"
     },
     {
-      "type":"filters.assign",
-      "assignment":"Classification[:]=0"
+      "type": "filters.assign",
+      "assignment": "Classification[:]=0"
     },
     {
-      "type":"filters.elm"
+      "type": "filters.elm"
     },
     {
-      "type":"filters.outlier"
+      "type": "filters.csf",
+      "ignore:" "Classification[7:7]"
     },
     {
-      "type":"filters.csf"
+      "type": "filters.range",
+      "limits": "Classification[2:2]"
     },
     {
-      "type":"filters.range",
-      "limits":"Classification[2:2]"
-    },
-    {
-      "type":"writers.las",
-      "filename":"APPF-ground-default.laz"
+      "type": "writers.las",
+      "filename": "APPF-ground-default.laz"
     }
 ]
 ```
@@ -100,7 +98,6 @@ Let's try to fix that. Create a file 'rpas-ground.json' and populate it with:
 
 - using `filters.assign` to label all points as unclassified ([documentation](https://pdal.io/stages/filters.assign.html))
 - applying `filters.elm` (extended local minimum) to label 'low points' as noise (ASPRS LAS class 7) ([documentation](https://pdal.io/stages/filters.elm.html))
-- then applying `filters.outlier`, using a statisical approach label remaining outlying points as noise (ASPRS LAS class 7)([documentation](https://pdal.io/stages/filters.outlier.html))
 - next, using `filters.csf` (Cloth Simulation Filter) to label points as 'ground', ignoring any points already labelled as 'noise' ([documentation](https://pdal.io/stages/filters.csf.html))
 - ...then finally, removing any points *not* labelled as ground from the output and writing them out to `APPF-ground-default.laz`
 
@@ -114,7 +111,7 @@ We've also leaped right into the deep end with a long chain of processing. The p
 
 Try pulling apart the pipeline and running parts of it, or removing some of the filters and see what happens by viewing results in CloudCompare.
 
-## Overriding options, and making better ground
+## Overriding options, and making different ground
 
 An easy assumption to make using pipelines is that everything is fixed to the parameters given in the JSON configuration.
 
@@ -125,26 +122,23 @@ Let's modify our pipeline a little to remove the final filter, and write out the
 ```
 [
     {
-        "type":"readers.las",
-        "filename":"APPF-farm-sample.laz"
+        "type": "readers.las",
+        "filename": "APPF-farm-sample.laz"
     },
     {
-        "type":"filters.assign",
-        "assignment":"Classification[:]=0"
+        "type": "filters.assign",
+        "assignment": "Classification[:]=0"
     },
     {
-        "type":"filters.elm"
+        "type": "filters.elm"
     },
     {
-        "type":"filters.outlier"
+        "type": "filters.csf",
+        "ignore": "Classification[7:7]"
     },
     {
-        "type":"filters.csf",
-        "ignore":"Classification[7:7]"
-    },
-    {
-        "type":"writers.las",
-        "filename":"APPF-ground-csf-allthepoints.laz"
+        "type": "writers.las",
+        "filename": "APPF-ground-csf-allthepoints.laz"
     }
 ]
 ```
@@ -179,9 +173,6 @@ Many end uses of point cloud data are not points at all - but rasters or other d
     },
     {
         "type":"filters.elm"
-    },
-    {
-        "type":"filters.outlier"
     },
     {
         "type":"filters.csf",
