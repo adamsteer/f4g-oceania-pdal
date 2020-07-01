@@ -1,5 +1,4 @@
-{
-  "pipeline": [
+[
     {
       "type": "readers.ept",
       "filename": "http://act-2015-rgb.s3.amazonaws.com",
@@ -15,5 +14,4 @@
         "filename":"output.tiff",
         "output_type":"idw"
     }
-  ]
-}
+]

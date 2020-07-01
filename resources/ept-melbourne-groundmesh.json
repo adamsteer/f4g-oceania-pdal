@@ -1,5 +1,4 @@
-{
-  "pipeline": [
+[
     {
         "type": "readers.ept",
         "filename": "http://melbourne-2018-ept.s3.amazonaws.com/",
@@ -19,5 +18,4 @@
         "faces":true,
         "filename":"output.ply"
     }
-  ]
-}
+]
