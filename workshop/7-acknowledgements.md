@@ -18,3 +18,5 @@ And with help from:
 Many corrections to this workshop were made by:
 - Luigi Pirelli [github profile](https://github.com/luipir)
 - Keith Moss [github profile](https://github.com/keithamoss)
+
+[Resources](8-resources.md)
