@@ -157,7 +157,7 @@ pdal pipeline rpas-ground-allthepoints.json --filters.csf.resolution=4 --writers
 
 In this case we've made a coarser 'cloth', which may help if your ground has many small spikes as artefacts. Here, I'm mainly trying to see if ground labelling can work better for the area around the dense forest here. Visualising the ground points from this process, there are a few small changes in how ground points are labelled. Is it better? We'd need to do more tests.
 
-![RPAS classification](../images/APPF-csf-modified-allthepoints.jpg)
+![RPAS classification](../images/APPF-csf-modified-allthepoints.png)
 
 In short, any option from the stages used in the pipeline can be over-ridden by passing equivalent command line options.
 
@@ -198,11 +198,11 @@ Many end uses of point cloud data are not points at all - but rasters or other d
 ```
 ...you can open the result in QGIS and take a look. Here's a preview:
 
-![PDALDTM in QGIS](../images/QGIS-dtm-smrf.jpg)
+![PDALDTM in QGIS](../images/QGIS-dtm-csf.png)
 
-The `window_size` option in `writers.gdal` can be used to fill small holes - we haven't applied it here, but you could add this to your pipeline to remove small data gaps.
+The `window_size` option in `writers.gdal` can be used to fill small holes - we haven't applied it here, which is pretty useful for checking our segmentation. You could add this to your pipeline to remove small data gaps, and then use `gdal_fillnodata.py` in postprocessing if you need a gap-free DTM.
 
-Also note that we didn't quite remove all the tree points. Working from a ground-first approach may not be the best strategy here. Perhaps with RPAS data, we should identify all the other things (buildings, trees...) and call the leftover points either ground or noise (see, for example: https://smathermather.com/2018/12/07/classifying-point-clouds-with-cgal/)
+Perhaps with RPAS data, we should identify all the other things (buildings, trees...) and call the leftover points either ground or noise (see, for example: https://smathermather.com/2018/12/07/classifying-point-clouds-with-cgal/)
 
 ## Other ways of labelling 'ground'
 
