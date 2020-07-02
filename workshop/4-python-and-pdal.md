@@ -1,21 +1,23 @@
 # PDAL + python
 
-PDAL can run python code, or be run *as* python code. Why Python? That's a user demand question for it's developers!
+PDAL can run python code, or be run *as* python code. Why Python? Because thats what I use! PDAL also has Java and Julia bindings, which you can explore as you need to.
 
 In order to make it go, PDAL needs to be compiled with Python bindings. Fortunately that happens already for both Conda and Docker installation. If you're building PDAL from scratch, make sure you include Python.
 
 ## Using Python functions in pipelines
 
-Python functions can be run as part of a `pipeline` using `filters.python`. This is handy for customised processing - for example reducing colour bitness, or inverting a dimension. Here's an example pipeline calling a Python function to invert the Z Dimension for a multibeam SONAR dataset. To keep you on your toes, I've introduced a new `readers.text` here - and show a way to go from XYZ to LAZ (or any PDAL writable format)
+Python functions can be run as part of a `pipeline` using `filters.python`. This is handy for customised processing - for example reducing colour bitness, or inverting a dimension. Here's an example pipeline calling a Python function to invert the Z Dimension - which might be useful if you're dealing with bathymetry data. To keep you on your toes, I've introduced a new `readers.text` here - and show a way to go from a text file to LAZ (or any PDAL writable format) as we go.
+
+The input file for this example is in the resources directory for this repository: [../resources/bathymetry-example.txt](../resources/bathymetry-example.txt)
 
 ```
 [
   {
       "type" : "readers.text",
-      "filename" : "inputfile.txt",
+      "filename" : "bathymetry-example.txt",
       "separator" : " ",
       "header" : "X Y Z Intensity",
-      "skip": 0
+      "skip": 1
     },
     {
       "type":"filters.python",
@@ -25,13 +27,15 @@ Python functions can be run as part of a `pipeline` using `filters.python`. This
     },
     {
       "type":"writers.las",
-      "filename":"file-filtered.laz"
+      "filename":"inverted-bathymetry.laz"
       "compression":"laszip"
     }
-  ]
+]
 ```
 
-The python function looks like this:
+Copy and paste the pipeline into something like `invert-z.json`
+
+The python function `invert_z` looks like this:
 
 ```
 def invert_z(Ins, Outs):
@@ -39,13 +43,45 @@ def invert_z(Ins, Outs):
     Outs['Z'] = -Z
 ```
 
-...and is saved in the working directory as `invert-z.py`
+Save this in your working directory as `invert-z.py`.
 
-Pretty simple, right? Your Python function can get as complex as you like. Just remember that PDAL's 'read, process, write' strategy extends to it's Python API also.
+Run this pipeline like:
+
+`pdal pipeline invert-z.json`
+
+Pretty simple, right? Your Python function can get as complex as you like. Just remember that PDAL's `read, process, write` strategy extends to its external language bindings as well.
+
+You can also declare Python functions entirely within a pipeline:
+```
+[
+  {
+      "type": "readers.text",
+      "filename": "bathymetry-example.txt",
+      "separator": " ",
+      "header": "X Y Z Intensity",
+      "skip": 1
+    },
+    {
+      "type": "filters.python",
+      "function": "invert_z",
+      "source": "def invert_z(Ins, Outs):\n\tZ = Ins['Z']\n\tOuts['Z'] = -Z\n\treturn True",
+      "module": "anything"
+    },
+    {
+      "type":"writers.las",
+      "filename":"inverted-bathymetry.laz",
+      "compression":"laszip"
+    }
+]
+```
+
+You can see the results using `pdal info` - all the Z values in your new LAZ file should be below 0!
+
+While it is possible to do this, it is likely a lot better for your sanity to use an external library of functions that are referred to in a pipeline, rather than declaring functions in the pipeline itself.
 
 ## PDAL as a python library
 
-This is best demonstrated in a Jupyter notebook. Head to the command line prompt, and in this repository switch to the 'notebooks' folder.
+PDAL can also be driven completely within a Python environment. This is best demonstrated in a Jupyter notebook. Head to the command line prompt, and in this repository switch to the 'notebooks' folder.
 
 Start your virtual environment:
 
