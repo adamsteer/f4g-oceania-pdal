@@ -51,7 +51,7 @@ Run this pipeline like:
 
 Pretty simple, right? Your Python function can get as complex as you like. Just remember that PDAL's `read, process, write` strategy extends to its external language bindings as well.
 
-You can also declare Python functions entirely within a pipeline:
+You can also declare Python functions entirely within a pipeline. This is the same workflow using just a PDAL pipeline:
 ```
 [
   {
