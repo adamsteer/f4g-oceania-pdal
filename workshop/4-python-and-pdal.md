@@ -95,6 +95,6 @@ Start your virtual environment:
 
 ## Summary
 
-Python functionality can be added to PDAL using a pipeline `filter` option. PDAL functionality can be added to python using PDAL as a module with few dependencies (primarily numpy). The canonical reference is here: https://pdal.io/python.html
+Python functionality can be added to PDAL using a pipeline `filter` option. PDAL functionality can be added to python using PDAL as a module with few dependencies (primarily numpy). The canonical reference is here: https://pdal.io/python.html. Python module development is also independent of PDAL itself - please refer to https://github.com/PDAL/python and make awesome improvements there!
 
 [next - entwine](5-entwine.md)
