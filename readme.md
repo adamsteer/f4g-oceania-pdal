@@ -30,7 +30,9 @@ This workshop requires a PDAL installation with python bindings. Using the minif
 
 Using Conda, create a new virtual environment like:
 
-`conda create -n f4g-pdal-workshop python pdal python-pdal entwine jq numpy pandas matplotlib jupyter scipy seaborn -c conda-forge`
+`conda create -n f4g-pdal-workshop python pdal=2.1 python-pdal entwine jq numpy pandas matplotlib jupyter scipy seaborn -c conda-forge`
+
+(for now, please keep to PDAL version 2.1 - a kind tester has identified an issue with PDAL 2.2 and some of the exercises. Fixes are coming!)
 
 This creates a virtual environment with PDAL, PDAL Python bindings, and Entwine installed, using the `conda-forge` channel. It also installs the `jq` command line utility, for parsing PDAL's metadata responses. Numpy, Pandas, Matplotlib and Jupyter are all Python packages for data manipulation and visualisation.
 
