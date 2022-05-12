@@ -20,7 +20,7 @@ This workshop uses common point cloud data analysis tasks to demonstrate 'thinki
 
 At the end of the workshop users should have a greater understanding of how PDAL's pipeline architecture works, and some ideas about how to apply it in their own data analysis tasks.
 
-## Why this workshop and not the main PDAL workshop?
+## Why this workshop exists alongside a PDAL workshop maintained by the PDAL team
 
 PDAL's authors maintain a workshop here: https://pdal.io/workshop/index.html . It is a fantastic tour of PDAL's diverse capabilities, and you should take that workshop as well! The reason I wrote this workshop was to focus on some end to end workshop examples. This workshop *leaves out* a huge amount of PDAL capability in order to:
 - focus on some simple, commonly-used patterns.
