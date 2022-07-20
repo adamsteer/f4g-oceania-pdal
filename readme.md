@@ -5,6 +5,10 @@ https://spatialised.net
 @adamdsteer  
 adam@spatialised.net
 
+## Warning
+
+A lot has changed in PDAL since 2018, and I no longer use Amazon Web Services to host data. Some parts of this workshop do not work as advertised until data can be migrated to a new host. Others may work better with newer PDAL features. An update is slowly arriving...
+
 ## Introduction
 
 This repository contains materials for a point cloud processing workshop developed by Dr. Adam Steer, originally for the FOSS4G SotM Oceania conference in 2018.
